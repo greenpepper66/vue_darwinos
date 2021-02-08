@@ -1,0 +1,58 @@
+https://blog.csdn.net/tattoo_jie/article/details/108542111
+
+https://blog.csdn.net/qq_41614928/article/details/105111360
+
+ubuntu 截图： ctrl + alt + PrintSc
+
+多页面配置：
+https://blog.csdn.net/guang_s/article/details/89406202
+
+
+
+ubuntu报错
+https://blog.csdn.net/weixin_43760383/article/details/84326032
+
+
+shell查询节点信息：
+http://192.168.1.4/shell.htm
+http://192.168.1.254/shell.htm
+执行ls命令：显示模型文件
+
+
+1.18 联调问题：
+1. 模型查询： 会返回一些shell后台查不到的数据，后台有的也可能不显示（只显示os界面上传上去的文件，后台文件可能有通过其他方式上传的）
+2. 模型删除： 删除成功，后台也查不到了，但是查询接口还是返回了删除的信息。
+
+1.19 联调问题：
+1. 昨天删除问题以定位：根据返回体里的模型状态来判断，1-delete，需要过滤显示。
+2. 模型的部署操作：返回响应都是一个{code:-1}，不知道啥意思?
+   另外部署后模型的status置为3-running，表示成为一个任务了？ 所以把原来模型的“启动”操作转移到任务视图里。
+   部署接口："/choosed_config/" + "/get_result/"
+3. 任务启动接口："/choosed_input/"， 返回一个ok，不知道做了啥，随便上传的任何一个文件都能执行ok。
+   任务终止接口："/terminate_input/"，都是返回一个ok
+   任务重启接口："/asic_reset/"，都是返回fail
+
+1.20 调试问题：
+1. vscode插件代码运行后不显示界面，服务没起来，没安装serve（https://www.jianshu.com/p/dcc767c7fb58）
+2. 识别时间曲线图，一直报告警：There is a chart instance already initialized on the dom.
+    https://github.com/apache/echarts/issues/5920
+    
+    let dom = document.getElementById(elementId);
+    let existInstance = echarts.getInstanceByDom(dom);
+    if (existInstance) {
+        if (true) {
+            echarts.dispose(existInstance);
+        }
+    }
+
+3. 遗留问题：
+    膜电压图：不能根据选中某个神经元时时更新
+    
+
+
+
+
+
+
+
+
