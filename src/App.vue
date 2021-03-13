@@ -22,6 +22,8 @@
 <script>
 import $ from "jquery";
 import { get_slave_boards } from "./js/os/get_slave_boards.js";
+import { get_chip_matrix } from "./js/os/get_chip_matrix";
+
 $(function () {
   var bodyH = $(window).height();
   console.log(bodyH);
@@ -30,13 +32,49 @@ $(function () {
 });
 
 function updateTreeView(){
-
- get_slave_boards(function (slave_boards) {
-   let JSONdata={
+ 
+let JSONdata={
   nodes:[],
   models:[],
   tasks:[],
-  }
+  };
+
+//测试用
+/*  let node = {
+        ip: "192.0.0.0",
+        id: 1,
+        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
+        role: 1,  //节点角色，1-master, 2-shadow,3-slave
+      };
+      JSONdata.nodes.push(node);
+
+node = {
+        ip: "192.0.0.1",
+        id: 4,
+        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
+        role: 3,  //节点角色，1-master, 2-shadow,3-slave
+      };
+      JSONdata.nodes.push(node);
+let model = {
+              id: 2,
+              name: "zxc",
+              nodeID: 1,
+              nodeIP: "192.0.0.0"              
+          }
+JSONdata.models.push(model)
+let task = {
+              id: 4,
+              name: "qwe",
+              nodeID: 1,
+              nodeIP: "192.0.0.0"              
+          }
+          JSONdata.tasks.push(task)  */
+
+
+ get_slave_boards(function (slave_boards) {
+   
   for (let i = 0; i < slave_boards.length; i++) {
     let slave_board = slave_boards[i];
     if (slave_board["board_status"]==1){
@@ -44,6 +82,7 @@ function updateTreeView(){
         ip: slave_board["ip_address"].join("."),
         id: slave_board["board_id"],
         chips: slave_board["chips"],
+        usedNeureNums: [],
         role: slave_board["board_role"],  //节点角色，1-master, 2-shadow,3-slave
       };
       JSONdata.nodes.push(node);
@@ -74,7 +113,33 @@ function updateTreeView(){
       }
     }
   }
-  $.ajax({
+
+  for (let i = 0; i < nodes.length; i++){
+    let node = nodes[i];
+    let board_ip=node.ip;
+    let board_id=node.id;
+    for (let j=0;j<node.chips.length;j++){
+      let chipID=j;
+      usedNeureNum=0
+      get_chip_matrix(board_ip, board_id, chipID, function (
+                chip_matrix
+            ) {
+                for (let i = 0; i < chip_matrix.length; i++) {
+                    if (chip_matrix[i][2] != 0) {
+                        usedNeureNum++;
+                    }
+                }                
+            });
+      node.usedNeureNums.push(usedNeureNum)
+    }
+  }
+  
+  
+});  
+
+
+
+$.ajax({
   url:"http://localhost:5002/post",
   method:"post",
   data:JSON.stringify(JSONdata ),
@@ -85,46 +150,13 @@ function updateTreeView(){
   error:function(error){
     console.error(error,"error");
   }
-})
-}); 
-
-
-
-//测试用
-/* let node = {
-        ip: "192.0.0.0",
-        id: 1,
-        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        role: 1,  //节点角色，1-master, 2-shadow,3-slave
-      };
-      JSONdata.nodes.push(node);
-
-node = {
-        ip: "192.0.0.1",
-        id: 4,
-        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        role: 3,  //节点角色，1-master, 2-shadow,3-slave
-      };
-      JSONdata.nodes.push(node);
-let model = {
-              id: 2,
-              name: "zxc",
-              nodeID: 1,
-              nodeIP: "192.0.0.0"              
-          }
-JSONdata.models.push(model)
-let task = {
-              id: 4,
-              name: "qwe",
-              nodeID: 1,
-              nodeIP: "192.0.0.0"              
-          }
-          JSONdata.tasks.push(task) */
-
-
+});
 
 }
-setInterval(updateTreeView, 10000);
+
+
+
+setInterval(updateTreeView, 3000);
 
 
 
