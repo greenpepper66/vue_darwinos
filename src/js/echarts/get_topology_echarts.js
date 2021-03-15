@@ -8,20 +8,20 @@ var myChart;
 
 var colors = [
     {
-        c1: "#00c7ef",  // 根节点的颜色-蓝绿色
+        c1: "#0066FF",  // 根节点的颜色-蓝绿色
         c2: "#b0c0f0",  // 浅紫色
     },
     {
         c1: "#FF8E14",  // 橙色
-        c2: "#a0a0a0",  // 未运行节点默认颜色 - 浅灰色
+        c2: "#AECBEC",  // 未运行节点默认颜色 - 浅灰色
     },
     {
         c1: "#AF5AFF",
-        c2: "#e0b0f0",  // slave节点运行颜色 - 粉色
+        c2: "#ECAED2",  // slave节点运行颜色 - 粉色
     },
     {
         c1: "#AF5AFF",
-        c2: "#A0A020", // 运行中shadow节点颜色 - 橘色
+        c2: "#FCCC75", // 运行中shadow节点颜色 - 橘色
     },
 ];
 
@@ -294,7 +294,7 @@ function handle2(arr, idx, color, category) {
                     },
                     {
                         offset: 1,
-                        color: "rgba(0, 0, 0, 0.3)", // 100% 处的颜色 -- 灰黑色
+                        color: color.c1, // 100% 处的颜色 -- 灰黑色
                     },
                 ],
                 global: false,

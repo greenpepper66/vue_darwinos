@@ -105,11 +105,11 @@ var vue_controler = {
         });
 
         // test
-        // _this.runNodeIDList.push(0)
-        // _this.runNodeIDList.push(4)
-        // drawTopologyEchart(11, 4, this.notMasterNodeNum, [4,6], this.$router)
+        _this.runNodeIDList.push(0)
+        _this.runNodeIDList.push(4)
+        drawTopologyEchart(11, 4, this.notMasterNodeNum, [4, 6], this.$router)
         // 导入系统结构拓扑图
-        drawTopologyEchart(_this.masterNodeID, _this.shadowNodeID, this.notMasterNodeNum, this.runNodeIDList, this.$router);
+        // drawTopologyEchart(_this.masterNodeID, _this.shadowNodeID, this.notMasterNodeNum, this.runNodeIDList, this.$router);
 
     },
     // 解决 echart 图像在路由跳转后不显示问题
