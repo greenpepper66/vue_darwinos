@@ -10,6 +10,8 @@
       <router-link to="/task">Task</router-link> |
       <router-link to="/taskDetail?nodeID=0&modelID=7">TaskDetail</router-link>
       |
+      <router-link to="/AppDetail?nodeID=0&modelID=7">AppDetail</router-link>
+      |
       <router-link to="/boardsData">BoardsData</router-link> |
       <router-link to="/about">About</router-link> -->
     </div>

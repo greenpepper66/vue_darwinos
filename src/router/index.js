@@ -41,9 +41,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/TaskInfo.vue')
   },
   {
-    path: '/taskDetail',  // 模型详情页面
+    path: '/taskDetail',  // 任务详情页面
     name: 'TaskDetail',
     component: () => import(/* webpackChunkName: "about" */ '../views/TaskDetail.vue')
+  },
+  {
+    path: '/appDetail',  // 应用详情页面
+    name: 'AppDetail',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AppDetail.vue')
   },
   {
     path: '/boardsData',  // 模型详情页面
