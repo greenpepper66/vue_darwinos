@@ -8,10 +8,10 @@ button {
   color: black;
 }
 button:hover {
-  background-color: #497fdf; 
+  background-color: #497fdf;
 }
 input {
-  background: rgb(230, 230, 230);;
+  background: rgb(230, 230, 230);
   color: black;
 }
 hr {
@@ -28,7 +28,7 @@ hr {
   background-color: black;
   z-index: 1001;
   -moz-opacity: 0.8;
-  opacity: .80;
+  opacity: 0.8;
   filter: alpha(opacity=88);
 }
 .alert-box {
@@ -45,42 +45,152 @@ hr {
   background-color: rgb(230, 230, 230);
 }
 
-
 /** UI设计后调整 **/
 #app {
-  background-color: rgb(230, 230, 230);
-} 
-
-/** 首页表格样式 */
-table.hovertable {
-  font-family: verdana, arial, sans-serif;
-  border-width: 1px;
-  border-collapse: collapse;
-  margin: 0 auto;
+  margin: 25px;
 }
 
-table.hovertable tr td:nth-child(1) {
+/**********************************************************************************************
+** 1. 首页样式
+**********************************************************************************************/
+.home_page {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  padding-top: 100px;
+  min-height: 1000px;
+  background-color: #f5f5f5;
+}
+/** 类脑logo样式 **/
+.home_logo_box {
+  margin-bottom: 38px;
+}
+.home_os_logo {
+  width: 100px;
+  height: 90px;
+}
+/** 统计信息 **/
+.home_introduction {
+  width: 550px;
+  float: right;
+  margin-right: 90px;
+}
+.home_statusOkLogo {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #45b700;
+  display: inline-block;
+  vertical-align: middle;
+}
+.home_statusErrLogo {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: red;
+  display: inline-block;
+  vertical-align: middle;
+}
+/** 拓扑图样式 **/
+.home_topology {
+  widows: 930px;
+  height: 800px;
+  margin-right: 640px;
+}
+.home_node_logoBox {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}
+.home_logoDesc {
+  margin-right: 30px;
+  vertical-align: middle;
+}
+/** 节点颜色标注样式 */
+.home_coommonNodeLogo {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle; /* 修改元素基线 同行显示*/
+  border-radius: 50%;
+}
+.masterNodeLogo {
+  background-image: radial-gradient(#0054ff 15%, #4e98ff 100%);
+}
+.shadowNodeLogo {
+  background-image: radial-gradient(#ffa73c 15%, #ffdda6 100%);
+}
+.slaveNodeLogo {
+  background-image: radial-gradient(#ff77e0 15%, #ffd1f9 100%);
+}
+.outlineNodeLogo {
+  background-image: radial-gradient(#77a4ff 15%, #afd1ff 100%);
+}
+/** 表格样式 */
+table.home_hovertable {
+  font-family: verdana, arial, sans-serif;
+  border-collapse: collapse;
+  margin: 0 auto;
+  height: 700px;
+}
+
+table.home_hovertable tr td:nth-child(1) {
   text-align: right;
   padding-right: 20px;
   width: 200px;
-  background-color: #e2dede;
+  background-color: #eeeeee;
 }
 
-table.hovertable tr td:nth-child(2) {
+table.home_hovertable tr td:nth-child(2) {
   text-align: left;
   padding-left: 20px;
-  width: 200px;
-}
-table.hovertable th {
-  border-width: 1px;
-  padding: 8px;
-  border-style: solid;
-  border-color: #c4c1c1;
+  width: 300px;
 }
 
-table.hovertable td {
-  border-width: 1px;
+table.home_hovertable td {
+  border-width: 2px;
   padding: 8px;
   border-style: solid;
-  border-color: #c4c1c1;
+  border-color: #d6d6d6;
+}
+
+/**********************************************************************************************
+** 2. 节点详情页
+**********************************************************************************************/
+.node_quarter-div {
+  width: 49%;
+  height: 440px;
+  float: left;
+  overflow: auto;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+}
+.node_chips {
+  margin-right: 10px;
+}
+.node_title {
+  font-family: SourceHanSansCN-Normal;
+  font-size: 20px;
+  color: #333333;
+  letter-spacing: 1.14px;
+  margin-top: 20px;
+}
+.node_models {
+  margin-left: 10px;
+}
+table.node_page_table {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 14px;
+  color: #666666;
+}
+table.node_page_table th {
+  background: rgba(238, 238, 238, 1);
+  height: 30px;
+}
+table.node_page_table tr {
+  border-width: 2px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #d6d6d6;
+  height: 30px;
 }

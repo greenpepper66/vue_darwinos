@@ -1,20 +1,18 @@
 <template>
   <div class="node">
     <div class="clearfix thewrap">
-      <div class="quarter-div chips">
-        <span>节点芯片图</span>
-        <hr/>
+      <div class="node_quarter-div node_chips">
+        <div class="node_title">节点芯片图</div>
         <span id="nodeIDValue" style="display: none">
           {{ $route.query.nodeID }}
         </span>
         <div id="nodeChipsEchart"></div>
       </div>
 
-      <div class="quarter-div models">
-        <span>模型列表</span>
-        <hr/>
+      <div class="node_quarter-div node_models">
+        <div class="node_title">模型列表</div>
         <div class="row">
-          <table class="table">
+          <table class="node_page_table">
             <thead>
               <tr>
                 <th>模型ID</th>
@@ -47,9 +45,8 @@
       </div>
     </div>
     <div class="clearfix thewrap">
-      <div class="quarter-div infor">
-        <span> 节点信息 </span>
-        <hr/>
+      <div class="node_quarter-div infor">
+       <div class="node_title">节点信息 </div>
         <div class="row">
           <table class="table">
             <thead>
@@ -87,9 +84,8 @@
           </table>
         </div>
       </div>
-      <div class="quarter-div tasks">
-        <span>任务列表</span>
-        <hr/>
+      <div class="node_quarter-div tasks">
+        <div class="node_title">任务列表</div>
         <div class="row">
           <table class="table">
             <thead>
@@ -156,38 +152,18 @@ export default vue_node;
   *zoom: 1;
 }
 .thewrap {
-  margin-top: 16px;
   width: 100%;
   box-sizing: border-box;
   overflow: auto;
 }
-.quarter-div {
-  width: 48%;
-  float: left;
-  overflow: auto;
-  margin-bottom: 10px;
-}
-.chips {
-  min-height: 360px;
-}
-.models {
-  min-height: 360px;
-}
-.infor {
-  min-height: 300px;
-}
-.tasks {
-  min-height: 300px;
-}
-.table {
-  margin-left: 20px;
-  margin-right: 20px;
-}
+
+
+
 #nodeChipsEchart {
-  width: 100%;
-  height: 90%;
-  min-height: 300px;
+  width: 80%;
+  height: 80%;
   margin: 0 auto;
+  margin-top: 20px;
 }
 hr {
    width:90%;

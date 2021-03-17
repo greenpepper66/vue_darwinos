@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <!-- router-link定义页面中点击触发部分 -->
-      <!-- <router-link to="/">Home</router-link> |
+    <!-- router-link定义页面中点击触发部分 -->
+    <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
       <router-link to="/node?nodeID=0">Node</router-link> |
       <router-link to="/chip?nodeID=0&chipID=3">Chip</router-link> |
       <router-link to="/model">Model</router-link> |
@@ -13,8 +13,8 @@
       <router-link to="/AppDetail?nodeID=0&modelID=7">AppDetail</router-link>
       |
       <router-link to="/boardsData">BoardsData</router-link> |
-      <router-link to="/about">About</router-link> -->
-    </div>
+      <router-link to="/about">About</router-link>
+    </div> -->
     <!-- router-view定义页面中显示部分 -->
     <router-view />
   </div>

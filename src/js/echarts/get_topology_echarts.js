@@ -8,20 +8,20 @@ var myChart;
 
 var colors = [
     {
-        c1: "#0066FF",  // 根节点的颜色-蓝绿色
-        c2: "#b0c0f0",  // 浅紫色
+        c1: "#0054ff",  // 根节点的颜色 - 深蓝
+        c2: "#4e98ff",  // 中蓝
     },
     {
-        c1: "#FF8E14",  // 橙色
-        c2: "#AECBEC",  // 未运行节点默认颜色 - 浅灰色
+        c1: "#77A4FF",  // 未运行节点默认颜色 - 中蓝
+        c2: "#AFD1FF",  //  浅蓝
     },
     {
-        c1: "#AF5AFF",
-        c2: "#ECAED2",  // slave节点运行颜色 - 粉色
+        c1: "#FF77E0", // slave节点运行颜色 - 粉色
+        c2: "#FFD1F9",  // 浅粉色
     },
     {
-        c1: "#AF5AFF",
-        c2: "#FCCC75", // 运行中shadow节点颜色 - 橘色
+        c1: "#FFA73C", // 运行中shadow节点颜色 - 橙色
+        c2: "#FFDDA6",  // 浅橙色
     },
 ];
 
@@ -35,30 +35,7 @@ var listData = [];  // 数组 只有一个元素，根节点
 var list = [];
 var links = [];
 
-var categories = [{
-    name: '根节点',
-    itemStyle: {
-        color: colors[0].c1
-    }
-},
-{
-    name: '不在线节点',
-    itemStyle: {
-        color: colors[1].c2
-    }
-},
-{
-    name: 'slave节点',
-    itemStyle: {
-        color: colors[2].c2
-    }
-},
-{
-    name: 'shadow节点',
-    itemStyle: {
-        color: colors[3].c2
-    }
-}];
+
 
 var option = {
     // // backgroundColor: "rgb(30, 30, 30)",
@@ -86,7 +63,7 @@ var option = {
             layout: "force",
             force: {
                 repulsion: 200,
-                edgeLength: 160,
+                edgeLength: 260,
             },
             nodeScaleRatio: 0.6,
             draggable: true,
@@ -94,7 +71,6 @@ var option = {
             symbol: "circle",
             data: list,
             links: links,
-            categories: categories,
             focusNodeAdjacency: true,
             scaleLimit: {
                 //所属组件的z分层，z值小的图形会被z值大的图形覆盖
@@ -109,7 +85,7 @@ var option = {
                     position: "right",
                     color: "#fff",
                     distance: 5,
-                    fontSize: 10,
+                    fontSize: 12,
                 },
             },
             lineStyle: {
@@ -224,10 +200,10 @@ function handle2(arr, idx, color, category) {
         let symbolSize = 10;
         switch (idx) {
             case 0:
-                symbolSize = 70;
+                symbolSize = 87;
                 break;
             case 1:
-                symbolSize = 50;
+                symbolSize = 67;
                 break;
             default:
                 symbolSize = 10;
@@ -285,16 +261,16 @@ function handle2(arr, idx, color, category) {
                 r: 0.5,
                 colorStops: [
                     {
-                        offset: 0,
+                        offset: 0.2,
                         color: color.c1, // 0% 处的颜色
                     },
                     {
                         offset: 0.8,
-                        color: color.c1, // 80% 处的颜色
+                        color: color.c2, // 80% 处的颜色
                     },
                     {
                         offset: 1,
-                        color: color.c1, // 100% 处的颜色 -- 灰黑色
+                        color: color.c2, // 100% 处的颜色 -- 灰黑色
                     },
                 ],
                 global: false,
@@ -307,12 +283,12 @@ function handle2(arr, idx, color, category) {
                 r: 0.5,
                 colorStops: [
                     {
-                        offset: 0,
+                        offset: 0.2,
                         color: color.c1, // 0% 处的颜色
                     },
                     {
-                        offset: 0.4,
-                        color: color.c1, // 0% 处的颜色
+                        offset: 0.8,
+                        color: color.c2, // 0% 处的颜色
                     },
                     {
                         offset: 1,
@@ -347,8 +323,8 @@ function handle2(arr, idx, color, category) {
                 };
             } else {
                 itemStyle = {   // 设置子节点的颜色，默认灰色#a0a0a0
-                    color: color.c2,
-                    borderColor: color.c2,
+                    color: bgcolor,
+                    // borderColor: color.c2,
                 };
             }
         }
@@ -413,13 +389,6 @@ function drawTopologyEchart(masterID, shadowID, allNodeNum, runNodeIDList, route
     listRunNode = runNodeIDList;
     listData = getData(masterID, allNodeNum);
 
-    // map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值：“name: 节点x”格式
-    // categories = listData[0].list.map((item) => {
-    //     return {
-    //         name: item.name,
-    //     };
-    // });
-    console.log("&&&", categories);
 
     // 绘图
     handle2(JSON.parse(JSON.stringify(listData)), 0);
