@@ -45,10 +45,10 @@
       </div>
     </div>
     <div class="clearfix thewrap">
-      <div class="node_quarter-div infor">
+      <div class="node_quarter-div node_infor">
        <div class="node_title">节点信息 </div>
         <div class="row">
-          <table class="table">
+          <table class="node_page_table">
             <thead>
               <tr>
                 <th>节点ID</th>
@@ -84,26 +84,31 @@
           </table>
         </div>
       </div>
-      <div class="node_quarter-div tasks">
+      <div class="node_quarter-div node_tasks">
         <div class="node_title">任务列表</div>
         <div class="row">
-          <table class="table">
+          <table  class="node_page_table">
             <thead>
               <tr>
-                <th>模型ID</th>
-                <th>模型名称</th>
-                <th>节点ID</th>
-                <th>节点IP</th>
-                <th>模型大小</th>
+                <th width="10%">模型ID</th>
+                <th width="10%">模型名称</th>
+                <th width="10%">节点ID</th>
+                <th width="10%">节点IP</th>
+                <th width="10%">模型大小</th>
                 <!-- <th>运行时间</th> -->
               </tr>
             </thead>
             <tbody>
               <template v-if="taskFileList.length == 0">
                 <tr>
-                  <template v-for="j in 5">
-                    <td width="10%" :key="j">-</td>
-                  </template>
+                  <td colspan="5" class="node_nodata_box">
+                    <img
+            src="../images/暂无数据.png"
+            alt="no data"
+            class="node_nodata_logo"
+          />
+          <div>暂无数据</div>
+                  </td>
                 </tr>
               </template>
               <tr v-for="task in taskFileList">
@@ -165,7 +170,5 @@ export default vue_node;
   margin: 0 auto;
   margin-top: 20px;
 }
-hr {
-   width:90%;
-}
+
 </style>

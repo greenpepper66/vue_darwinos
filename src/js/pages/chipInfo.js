@@ -23,9 +23,9 @@ var vue_chip = {
     mounted() {
         // 获取url传参数据
         let nodeIDVal = document.getElementById("nodeIDValue").innerHTML;
-        this.nodeID = nodeIDVal.replace(/\s*/g,"");
+        this.nodeID = nodeIDVal.replace(/\s*/g, "");
         let chipIDVal = document.getElementById("chipIDValue").innerHTML;
-        this.chipID = chipIDVal.replace(/\s*/g,"");
+        this.chipID = chipIDVal.replace(/\s*/g, "");
         console.log("node & chip id: ", this.nodeID, this.chipID);
 
         let _this = this;
@@ -42,10 +42,12 @@ var vue_chip = {
             _this.update_heatmap();
 
             // 画饼图
-            _this.updatePieEchart();
+            // _this.updatePieEchart();
 
         });
 
+        // test 画图
+        drawChipEchart(0, _this.chipID);
 
 
         // test
@@ -73,7 +75,7 @@ var vue_chip = {
                 }
                 // 画饼图, 参数为神经元使用比例 芯片ID
                 console.log("使用了：", _this.usedNeureNum);
-                drawChipEchart(Math.ceil(_this.usedNeureNum / (24 * 24) * 100) , _this.chipID);
+                drawChipEchart(Math.ceil(_this.usedNeureNum / (24 * 24) * 100), 0);
 
             });
         },

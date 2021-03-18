@@ -3,21 +3,27 @@ body {
   color: black;
   font-size: 16px;
 }
+
 button {
   background-color: rgb(230, 230, 230);
   color: black;
 }
+
 button:hover {
   background-color: #497fdf;
 }
+
 input {
   background: rgb(230, 230, 230);
   color: black;
 }
+
 hr {
   color: rgb(230, 230, 230);
 }
+
 /** light 弹出框样式 **/
+
 .black_overlay {
   display: none;
   position: absolute;
@@ -31,6 +37,7 @@ hr {
   opacity: 0.8;
   filter: alpha(opacity=88);
 }
+
 .alert-box {
   display: none;
   position: absolute;
@@ -46,6 +53,7 @@ hr {
 }
 
 /** UI设计后调整 **/
+
 #app {
   margin: 25px;
 }
@@ -53,6 +61,7 @@ hr {
 /**********************************************************************************************
 ** 1. 首页样式
 **********************************************************************************************/
+
 .home_page {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,20 +70,26 @@ hr {
   min-height: 1000px;
   background-color: #f5f5f5;
 }
+
 /** 类脑logo样式 **/
+
 .home_logo_box {
   margin-bottom: 38px;
 }
+
 .home_os_logo {
   width: 100px;
   height: 90px;
 }
+
 /** 统计信息 **/
+
 .home_introduction {
   width: 550px;
   float: right;
   margin-right: 90px;
 }
+
 .home_statusOkLogo {
   width: 17px;
   height: 17px;
@@ -83,6 +98,7 @@ hr {
   display: inline-block;
   vertical-align: middle;
 }
+
 .home_statusErrLogo {
   width: 17px;
   height: 17px;
@@ -91,41 +107,54 @@ hr {
   display: inline-block;
   vertical-align: middle;
 }
+
 /** 拓扑图样式 **/
+
 .home_topology {
   widows: 930px;
   height: 800px;
   margin-right: 640px;
 }
+
 .home_node_logoBox {
   font-size: 14px;
   letter-spacing: 0.8px;
 }
+
 .home_logoDesc {
   margin-right: 30px;
   vertical-align: middle;
 }
+
 /** 节点颜色标注样式 */
+
 .home_coommonNodeLogo {
   width: 24px;
   height: 24px;
   display: inline-block;
-  vertical-align: middle; /* 修改元素基线 同行显示*/
+  vertical-align: middle;
+  /* 修改元素基线 同行显示*/
   border-radius: 50%;
 }
+
 .masterNodeLogo {
   background-image: radial-gradient(#0054ff 15%, #4e98ff 100%);
 }
+
 .shadowNodeLogo {
   background-image: radial-gradient(#ffa73c 15%, #ffdda6 100%);
 }
+
 .slaveNodeLogo {
   background-image: radial-gradient(#ff77e0 15%, #ffd1f9 100%);
 }
+
 .outlineNodeLogo {
   background-image: radial-gradient(#77a4ff 15%, #afd1ff 100%);
 }
+
 /** 表格样式 */
+
 table.home_hovertable {
   font-family: verdana, arial, sans-serif;
   border-collapse: collapse;
@@ -156,6 +185,7 @@ table.home_hovertable td {
 /**********************************************************************************************
 ** 2. 节点详情页
 **********************************************************************************************/
+
 .node_quarter-div {
   width: 49%;
   height: 440px;
@@ -164,33 +194,84 @@ table.home_hovertable td {
   margin-bottom: 20px;
   background-color: #f5f5f5;
 }
-.node_chips {
+
+.node_chips, .node_infor {
   margin-right: 10px;
 }
-.node_title {
+
+.node_title, .chip_title {
   font-family: SourceHanSansCN-Normal;
   font-size: 20px;
   color: #333333;
   letter-spacing: 1.14px;
   margin-top: 20px;
+  margin-bottom: 28px;
 }
-.node_models {
+
+.node_models, .node_tasks {
   margin-left: 10px;
 }
+
 table.node_page_table {
   margin-left: 20px;
   margin-right: 20px;
   font-size: 14px;
   color: #666666;
+  font-family: PingFangSC-Regular;
 }
+
 table.node_page_table th {
   background: rgba(238, 238, 238, 1);
   height: 30px;
 }
+
 table.node_page_table tr {
   border-width: 2px;
   padding: 8px;
   border-style: solid;
-  border-color: #d6d6d6;
-  height: 30px;
+  border-color: #D6D6D6;
+  height: 40px;
+}
+
+table, td {
+  border-collapse: collapse;
+}
+
+.node_nodata_box {
+  text-align: center;
+  height: 200px;
+}
+
+.node_nodata_logo {
+  height: 100px;
+}
+
+/**********************************************************************************************
+** 3. 芯片详情页
+**********************************************************************************************/
+
+.chip_quarter-div {
+  width: 49%;
+  height: 440px;
+  float: left;
+  overflow: auto;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+}
+
+.chip_matrix, .chip_infor {
+  margin-right: 10px;
+}
+
+.chip_pie, .chip_tasks {
+  margin-left: 10px;
+}
+
+.chip_title {
+  font-family: SourceHanSansCN-Normal;
+  font-size: 20px;
+  color: #333333;
+  letter-spacing: 1.14px;
+  margin-top: 20px;
+  margin-bottom: 28px;
 }

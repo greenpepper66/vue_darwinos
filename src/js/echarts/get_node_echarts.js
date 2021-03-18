@@ -77,19 +77,19 @@ let placeHolderStyle = {
 };
 let data = [];
 let color1 = [
-    'rgb(255, 235, 205)',
-    'rgb(240, 255, 240)',
-    'rgb(205, 140, 149)',
-    'rgb(190, 190, 190)',
-    'rgb(84, 139, 84)',
-    'rgb(135, 206, 235)',
+    '#e7e7e7',
+    '#b5cbf7',
+    '#b5ead5',
+    '#dee7f9',
+    '#f6de99',
+    '#f0bbae',
 
-    'rgb(230, 230, 250)',
-    'rgb(238, 221, 130)',
-    'rgb(255, 187, 255)',
-    'rgb(205, 179, 139)',
-    'rgb(224, 238, 238)',
-    'rgb(130, 130, 130)',
+    '#bde3f2',
+    '#ccbee4',
+    '#fad1af',
+    '#9fcfcf',
+    '#facfe1',
+    '#b5cbf7',
 ];
 
 for (var i = 0; i < scaleData.length; i++) {

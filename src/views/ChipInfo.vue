@@ -1,30 +1,27 @@
 <template>
   <div class="chip">
     <div class="clearfix thewrap">
-      <div class="quarter-div matrix">
-        <span>芯片{{$route.query.chipID }}上神经元状态示意图</span>
+      <div class="chip_quarter-div chip_matrix">
+        <div class="chip_title">芯片{{$route.query.chipID }}上神经元状态示意图</div>
         <span id="nodeIDValue" style="display: none">
           {{ $route.query.nodeID }}
         </span>
         <span id="chipIDValue" style="display: none">
           {{ $route.query.chipID }}
         </span>
-        <hr/>
         <div id="heatmap"></div>
       </div>
 
-      <div class="quarter-div pie">
-        <span>神经元使用占比</span>
-        <hr />
+      <div class="chip_quarter-div chip_pie">
+        <div class="chip_title">神经元使用占比</div>
         <div id="chipPie"></div>
       </div>
     </div>
     <div class="clearfix thewrap">
-      <div class="quarter-div infor">
-        <span> 芯片信息 </span>
-        <hr/>
+      <div class="chip_quarter-div chip_infor">
+        <div class="chip_title">芯片信息</div>
         <div class="row">
-          <table class="table">
+          <table class="node_page_table">
             <thead>
               <tr>
                 <th>芯片ID</th>
@@ -61,29 +58,33 @@
         </div>
       </div>
 
-      <div class="quarter-div tasks">
-        <span>任务列表</span>
-        <hr/>
+      <div class="chip_quarter-div chip_tasks">
+        <div class="chip_title">任务列表</div>
         <div class="row">
-          <table class="table">
+          <table class="node_page_table">
             <thead>
-              <tr>
-                <th>模型ID</th>
-                <th>模型名称</th>
-                <th>节点ID</th>
-                <th>节点IP</th>
-                <th>模型大小</th>
-                <th>运行时间</th>
+             <tr>
+                <th width="10%">模型ID</th>
+                <th width="10%">模型名称</th>
+                <th width="10%">节点ID</th>
+                <th width="10%">节点IP</th>
+                <th width="10%">模型大小</th>
+                <!-- <th>运行时间</th> -->
               </tr>
-              <tr>
-                <template v-for="i in 6">
-                  <td width="10%" :key="i">-</td>
-                </template>
-              </tr>
-            </thead>
+              </thead>
+              
+            
             <tbody>
-              <template> </template>
-              <tr></tr>
+             <tr>
+                  <td colspan="5" class="node_nodata_box">
+                    <img
+            src="../images/暂无数据.png"
+            alt="no data"
+            class="node_nodata_logo"
+          />
+          <div>暂无数据</div>
+                  </td>
+                </tr>
             </tbody>
           </table>
         </div>
@@ -128,29 +129,7 @@ export default vue_chip;
   box-sizing: border-box;
   overflow: auto;
 }
-.quarter-div {
-  width: 50%;
-  box-sizing: border-box;
-  float: left;
-  overflow: auto;
-  margin-bottom: 10px;
-}
-.matrix {
-  min-height: 360px;
-}
-.pie {
-  min-height: 360px;
-}
-.infor {
-  min-height: 300px;
-}
-.tasks {
-  min-height: 300px;
-}
-.table {
-  margin-left: 20px;
-  margin-right: 20px;
-}
+
 #heatmap {
   width: 100%;
   height: 80%;
@@ -163,7 +142,5 @@ export default vue_chip;
   margin: 0 auto;
   min-height: 300px;
 }
-hr {
-  width: 90%;
-}
+
 </style>

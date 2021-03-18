@@ -19,20 +19,20 @@ function buildOption() {
             textStyle: {
                 rich: {
                     a: {
-                        fontSize: 12,
-                        color: '#29EEF3'
+                        fontSize: 16,
+                        color: '#30AEC2'
                     },
 
                     c: {
-                        fontSize: 12,
-                        color: '#29EEF3',
+                        fontSize: 16,
+                        color: '#30AEC2',
                         // padding: [5,0]
                     }
                 }
             },
             subtextStyle: {
-                fontSize: 12,
-                color: '#29EEF3',
+                fontSize: 16,
+                color: '#30AEC2',
                 align: 'center',
             },
             itemGap: 2,
@@ -56,9 +56,9 @@ function buildOption() {
                             endAngle: (90 + angle) * Math.PI / 180
                         },
                         style: {
-                            stroke: "#8383FA",
+                            stroke: "#855fff",
                             fill: "transparent",
-                            lineWidth: 1.5
+                            lineWidth: 6
                         },
                         silent: true
                     };
@@ -81,8 +81,8 @@ function buildOption() {
                             r: 4
                         },
                         style: {
-                            stroke: "#8450F9", //绿
-                            fill: "#8450F9"
+                            stroke: "#855fff",
+                            fill: "#ab91ff"
                         },
                         silent: true
                     };
@@ -90,7 +90,6 @@ function buildOption() {
                 data: [0]
             },
             // 蓝色
-
             {
                 name: "ring5",
                 type: 'custom',
@@ -106,9 +105,9 @@ function buildOption() {
                             endAngle: (270 + angle) * Math.PI / 180
                         },
                         style: {
-                            stroke: "#4386FA",
+                            stroke: "#ac776f",
                             fill: "transparent",
-                            lineWidth: 1.5
+                            lineWidth: 5
                         },
                         silent: true
                     };
@@ -116,7 +115,7 @@ function buildOption() {
                 data: [0]
             },
             {
-                name: "ring5", // 蓝色
+                name: "ring5", // 蓝点
                 type: 'custom',
                 coordinateSystem: "none",
                 renderItem: function (params, api) {
@@ -132,15 +131,15 @@ function buildOption() {
                             r: 4
                         },
                         style: {
-                            stroke: "#4386FA", //绿
-                            fill: "#4386FA"
+                            stroke: "#ac776f",
+                            fill: "#ee9580"
                         },
                         silent: true
                     };
                 },
                 data: [0]
             },
-
+            // 绿色
             {
                 name: "ring5",
                 type: 'custom',
@@ -156,9 +155,9 @@ function buildOption() {
                             endAngle: (40 + -angle) * Math.PI / 180
                         },
                         style: {
-                            stroke: "#0CD3DB",
+                            stroke: "#07c9e1",
                             fill: "transparent",
-                            lineWidth: 1.5
+                            lineWidth: 7
                         },
                         silent: true
                     };
@@ -166,7 +165,6 @@ function buildOption() {
                 data: [0]
             },
             // 橘色
-
             {
                 name: "ring5",
                 type: 'custom',
@@ -184,13 +182,14 @@ function buildOption() {
                         style: {
                             stroke: "#FF8E89",
                             fill: "transparent",
-                            lineWidth: 1.5
+                            lineWidth: 6
                         },
                         silent: true
                     };
                 },
                 data: [0]
-            }, {
+            },
+            { //橘点
                 name: "ring5",
                 type: 'custom',
                 coordinateSystem: "none",
@@ -276,7 +275,7 @@ function buildOption() {
                                     color: '#0CD3DB' // 100% 处的颜色
                                 }, {
                                     offset: 1,
-                                    color: '#646CF9' // 100% 处的颜色
+                                    color: '#7ab5ff' // 100% 处的颜色
                                 }
                                 ]
                             },
@@ -293,7 +292,7 @@ function buildOption() {
                     },
                     itemStyle: {
                         normal: {
-                            color: "#173164"
+                            color: "#7ab5ff"  // 第二圈宽圈颜色
                         }
                     }
                 }
@@ -322,10 +321,10 @@ function buildOption() {
                             color: { // 完成的圆环的颜色
                                 colorStops: [{
                                     offset: 0,
-                                    color: '#00EDF3' // 0% 处的颜色
+                                    color: '#7ab5ff' // 0% 处的颜色
                                 }, {
                                     offset: 1,
-                                    color: '#646CF9' // 100% 处的颜色
+                                    color: '#7ab5ff' // 100% 处的颜色
                                 }]
                             },
                         }
@@ -341,7 +340,7 @@ function buildOption() {
                     },
                     itemStyle: {
                         normal: {
-                            color: "#173164"
+                            color: "#7ab5ff"  //最中间细圈颜色
                         }
                     }
                 }
