@@ -85,7 +85,7 @@ hr {
 /** 统计信息 **/
 
 .home_introduction {
-  width: 550px;
+  width: 35%;
   float: right;
   margin-right: 90px;
 }
@@ -111,7 +111,7 @@ hr {
 /** 拓扑图样式 **/
 
 .home_topology {
-  widows: 930px;
+  width: 60%;
   height: 800px;
   margin-right: 640px;
 }
@@ -218,6 +218,8 @@ table.node_page_table {
   font-size: 14px;
   color: #666666;
   font-family: PingFangSC-Regular;
+  width: 90%;
+  margin: auto;
 }
 
 table.node_page_table th {
@@ -263,7 +265,10 @@ table, td {
   margin-right: 10px;
 }
 
-.chip_pie, .chip_tasks {
+.chip_pie {
+  margin-left: 10px;
+}
+.chip_tasks {
   margin-left: 10px;
 }
 
@@ -274,4 +279,12 @@ table, td {
   letter-spacing: 1.14px;
   margin-top: 20px;
   margin-bottom: 28px;
+}
+.chip_nodata_box {
+  text-align: center;
+  height: 200px;
+}
+
+.chip_nodata_logo {
+  height: 100px;
 }

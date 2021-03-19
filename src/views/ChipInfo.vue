@@ -2,7 +2,9 @@
   <div class="chip">
     <div class="clearfix thewrap">
       <div class="chip_quarter-div chip_matrix">
-        <div class="chip_title">芯片{{$route.query.chipID }}上神经元状态示意图</div>
+        <div class="chip_title">
+          芯片{{ $route.query.chipID }}上神经元状态示意图
+        </div>
         <span id="nodeIDValue" style="display: none">
           {{ $route.query.nodeID }}
         </span>
@@ -32,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-              <template v-if="board_ip ==''">
+              <template v-if="board_ip == ''">
                 <tr>
                   <template v-for="i in 5">
                     <td width="10%" :key="i">-</td>
@@ -40,18 +42,18 @@
                 </tr>
               </template>
               <template v-else>
-              <tr>
-                <td width="10%">{{ chipID }}</td>
-                <td width="10%">{{ nodeID }}</td>
-                <td width="10%">{{ board_ip }}</td>
-                <td width="10%">{{ neureNum }}</td>
-                <template v-if="chipStatus == 1">
-                  <td width="10%">健康</td>
-                </template>
-                <template v-else>
-                  <td width="10%">异常</td>
-                </template>
-              </tr>
+                <tr>
+                  <td width="10%">{{ chipID }}</td>
+                  <td width="10%">{{ nodeID }}</td>
+                  <td width="10%">{{ board_ip }}</td>
+                  <td width="10%">{{ neureNum }}</td>
+                  <template v-if="chipStatus == 1">
+                    <td width="10%">健康</td>
+                  </template>
+                  <template v-else>
+                    <td width="10%">异常</td>
+                  </template>
+                </tr>
               </template>
             </tbody>
           </table>
@@ -63,28 +65,26 @@
         <div class="row">
           <table class="node_page_table">
             <thead>
-             <tr>
-                <th width="10%">模型ID</th>
-                <th width="10%">模型名称</th>
-                <th width="10%">节点ID</th>
-                <th width="10%">节点IP</th>
-                <th width="10%">模型大小</th>
-                <!-- <th>运行时间</th> -->
+              <tr>
+                <th>模型ID</th>
+                <th>模型名称</th>
+                <th>节点ID</th>
+                <th>节点IP</th>
+                <th>模型大小</th>
               </tr>
-              </thead>
-              
-            
+            </thead>
+
             <tbody>
-             <tr>
-                  <td colspan="5" class="node_nodata_box">
-                    <img
-            src="../images/暂无数据.png"
-            alt="no data"
-            class="node_nodata_logo"
-          />
-          <div>暂无数据</div>
-                  </td>
-                </tr>
+              <tr>
+                <td colspan="5" class="chip_nodata_box">
+                  <img
+                    src="../images/暂无数据.png"
+                    alt="no data"
+                    class="chip_nodata_logo"
+                  />
+                  <div>暂无数据</div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -110,7 +110,6 @@ export default vue_chip;
 
 
 <style scoped>
-
 /*将页面分为4个部分*/
 .clearfix:before,
 .clearfix:after {
@@ -142,5 +141,4 @@ export default vue_chip;
   margin: 0 auto;
   min-height: 300px;
 }
-
 </style>

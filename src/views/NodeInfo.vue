@@ -20,24 +20,22 @@
                 <th>节点ID</th>
                 <th>节点IP</th>
                 <th>模型大小</th>
-                <!-- <th>模型状态</th> -->
               </tr>
             </thead>
             <tbody>
               <template v-if="modelFileList.length == 0">
                 <tr>
                   <template v-for="j in 5">
-                    <td width="10%" :key="j">-</td>
+                    <td :key="j">-</td>
                   </template>
                 </tr>
               </template>
               <tr v-for="model in modelFileList">
-                <td width="10%">{{ model.id }}</td>
-                <td width="10%">{{ model.name }}</td>
-                <td width="10%">{{ model.nodeID }}</td>
-                <td width="10%">{{ model.nodeIP }}</td>
-                <td width="10%">{{ model.size }}</td>
-                <!-- <td width="10%">{{ model["model_status"] }}</td> -->
+                <td>{{ model.id }}</td>
+                <td>{{ model.name }}</td>
+                <td>{{ model.nodeID }}</td>
+                <td>{{ model.nodeIP }}</td>
+                <td>{{ model.size }}</td>
               </tr>
             </tbody>
           </table>
@@ -46,7 +44,7 @@
     </div>
     <div class="clearfix thewrap">
       <div class="node_quarter-div node_infor">
-       <div class="node_title">节点信息 </div>
+        <div class="node_title">节点信息</div>
         <div class="row">
           <table class="node_page_table">
             <thead>
@@ -87,7 +85,7 @@
       <div class="node_quarter-div node_tasks">
         <div class="node_title">任务列表</div>
         <div class="row">
-          <table  class="node_page_table">
+          <table class="node_page_table">
             <thead>
               <tr>
                 <th width="10%">模型ID</th>
@@ -103,20 +101,20 @@
                 <tr>
                   <td colspan="5" class="node_nodata_box">
                     <img
-            src="../images/暂无数据.png"
-            alt="no data"
-            class="node_nodata_logo"
-          />
-          <div>暂无数据</div>
+                      src="../images/暂无数据.png"
+                      alt="no data"
+                      class="node_nodata_logo"
+                    />
+                    <div>暂无数据</div>
                   </td>
                 </tr>
               </template>
               <tr v-for="task in taskFileList">
-                  <td width="10%">{{ task.id }}</td>
-                  <td width="10%">{{ task.name }}</td>
-                  <td width="10%">{{ task.nodeID }}</td>
-                  <td width="10%">{{ task.nodeIP }}</td>
-                  <td width="10%">{{ task.size }}</td>
+                <td width="10%">{{ task.id }}</td>
+                <td width="10%">{{ task.name }}</td>
+                <td width="10%">{{ task.nodeID }}</td>
+                <td width="10%">{{ task.nodeIP }}</td>
+                <td width="10%">{{ task.size }}</td>
               </tr>
             </tbody>
           </table>
@@ -143,7 +141,6 @@ export default vue_node;
 </script>
 
 <style scoped>
-
 /*将页面分为4个部分*/
 .clearfix:before,
 .clearfix:after {
@@ -162,13 +159,10 @@ export default vue_node;
   overflow: auto;
 }
 
-
-
 #nodeChipsEchart {
   width: 80%;
   height: 80%;
   margin: 0 auto;
   margin-top: 20px;
 }
-
 </style>

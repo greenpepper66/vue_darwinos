@@ -1,20 +1,18 @@
 <template>
   <div id="app">
-    <!-- router-link定义页面中点击触发部分 -->
-    <!-- <div id="nav">
+    <div id="nav">
+      <!-- router-link定义页面中点击触发部分 -->
       <router-link to="/">Home</router-link> |
       <router-link to="/node?nodeID=0">Node</router-link> |
       <router-link to="/chip?nodeID=0&chipID=3">Chip</router-link> |
       <router-link to="/model">Model</router-link> |
-      <router-link to="/uploadModel">UploadModel</router-link> | 
+      <router-link to="/uploadModel">UploadModel</router-link> |
       <router-link to="/task">Task</router-link> |
       <router-link to="/taskDetail?nodeID=0&modelID=7">TaskDetail</router-link>
       |
-      <router-link to="/AppDetail?nodeID=0&modelID=7">AppDetail</router-link>
-      |
       <router-link to="/boardsData">BoardsData</router-link> |
       <router-link to="/about">About</router-link>
-    </div> -->
+    </div>
     <!-- router-view定义页面中显示部分 -->
     <router-view />
   </div>
@@ -33,16 +31,15 @@ $(function () {
   $("#app").height(h);
 });
 
-function updateTreeView(){
- 
-let JSONdata={
-  nodes:[],
-  models:[],
-  tasks:[],
+function updateTreeView() {
+  let JSONdata = {
+    nodes: [],
+    models: [],
+    tasks: [],
   };
 
-//测试用
-/*  let node = {
+  //测试用
+  /*  let node = {
         ip: "192.0.0.0",
         id: 1,
         chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -74,93 +71,85 @@ let task = {
           }
           JSONdata.tasks.push(task)  */
 
+  get_slave_boards(function (slave_boards) {
+    for (let i = 0; i < slave_boards.length; i++) {
+      let slave_board = slave_boards[i];
+      if (slave_board["board_status"] == 1) {
+        let node = {
+          ip: slave_board["ip_address"].join("."),
+          id: slave_board["board_id"],
+          chips: slave_board["chips"],
+          usedNeureNums: [],
+          role: slave_board["board_role"], //节点角色，1-master, 2-shadow,3-slave
+        };
+        JSONdata.nodes.push(node);
 
- get_slave_boards(function (slave_boards) {
-   
-  for (let i = 0; i < slave_boards.length; i++) {
-    let slave_board = slave_boards[i];
-    if (slave_board["board_status"]==1){
-      let node = {
-        ip: slave_board["ip_address"].join("."),
-        id: slave_board["board_id"],
-        chips: slave_board["chips"],
-        usedNeureNums: [],
-        role: slave_board["board_role"],  //节点角色，1-master, 2-shadow,3-slave
-      };
-      JSONdata.nodes.push(node);
-      
-      let file_list=slave_board["file_list"];
-      for (let j = 0; j < file_list.length; j++){
-        let model_file=file_list[j];
-        //要显示在模型视图里面
-        if (model_file['model_status'] != 1 && model_file['model_size'] != 0){
-          let model = {
+        let file_list = slave_board["file_list"];
+        for (let j = 0; j < file_list.length; j++) {
+          let model_file = file_list[j];
+          //要显示在模型视图里面
+          if (
+            model_file["model_status"] != 1 &&
+            model_file["model_size"] != 0
+          ) {
+            let model = {
               id: model_file["model_id"],
               name: model_file["model_name"],
               nodeID: node.id,
-              nodeIP: node.ip              
+              nodeIP: node.ip,
+            };
+            JSONdata.models.push(model);
           }
-          JSONdata.models.push(model)
-        }
-        //要显示在任务视图里面
-        if (model_file['model_status'] ==3) {
-          let task = {
+          //要显示在任务视图里面
+          if (model_file["model_status"] == 3) {
+            let task = {
               id: model_file["model_id"],
               name: model_file["model_name"],
               nodeID: node.id,
-              nodeIP: node.ip              
+              nodeIP: node.ip,
+            };
+            JSONdata.tasks.push(task);
           }
-          JSONdata.tasks.push(task)
         }
       }
     }
-  }
 
-  for (let i = 0; i < nodes.length; i++){
-    let node = nodes[i];
-    let board_ip=node.ip;
-    let board_id=node.id;
-    for (let j=0;j<node.chips.length;j++){
-      let chipID=j;
-      usedNeureNum=0
-      get_chip_matrix(board_ip, board_id, chipID, function (
-                chip_matrix
-            ) {
-                for (let i = 0; i < chip_matrix.length; i++) {
-                    if (chip_matrix[i][2] != 0) {
-                        usedNeureNum++;
-                    }
-                }                
-            });
-      node.usedNeureNums.push(usedNeureNum)
-    }
-  }
-  
-  
-});  
+    // 发送给插件导航栏
+    console.log("app page get all boards data: ", JSONdata);
+    $.ajax({
+      url: "http://localhost:5002/post",
+      method: "post",
+      data: JSON.stringify(JSONdata),
+      // dataType: "json",   // 加上这个会进入error分支，即使返回200
+      success: function (response) {
+        console.log(response, "page post success");
+      },
+      error: function (error) {
+        console.error(error, "page post error");
+      },
+    });
 
-
-
-$.ajax({
-  url:"http://localhost:5002/post",
-  method:"post",
-  data:JSON.stringify(JSONdata ),
-  dataType:"json",
-  success:function(response){
-    console.log(response,"success");
-  },
-  error:function(error){
-    console.error(error,"error");
-  }
-});
-
+    // for (let i = 0; i < JSONdata.nodes.length; i++) {
+    //   let node = JSONdata.nodes[i];
+    //   let board_ip = node.ip;
+    //   let board_id = node.id;
+    //   for (let j = 0; j < node.chips.length; j++) {
+    //     let chipID = j;
+    //     let usedNeureNum = 0;
+    //     get_chip_matrix(board_ip, board_id, chipID, function (chip_matrix) {
+    //       for (let i = 0; i < chip_matrix.length; i++) {
+    //         if (chip_matrix[i][2] != 0) {
+    //           usedNeureNum++;
+    //         }
+    //       }
+    //     });
+    //     node.usedNeureNums.push(usedNeureNum);
+    //   }
+    // }
+  });
 }
 
-
-
 setInterval(updateTreeView, 3000);
-
-
 
 export default {};
 </script>

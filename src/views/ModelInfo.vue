@@ -78,7 +78,7 @@
                 <button @click="task_delete(model.nodeIP, model.id)">
                   删除
                 </button>
-                <button @click="alert('test：模型详细信息')">详情</button>
+                <!-- <button @click="alert('test：模型详细信息')">详情</button> -->
               </td>
             </tr>
           </tbody>

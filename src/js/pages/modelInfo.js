@@ -151,7 +151,11 @@ var vue_model = {
                             console.log("deploy failed, ret: ", ret);
                         } else {
                             clearInterval(interval);
-                            _this.modelDeployResult = ret.code;
+                            if(ret.code == 0 ) {
+                                _this.modelDeployResult = "success";
+                            } else {
+                                _this.modelDeployResult = "failed"
+                            }
                             _this.showDeployResult();
                             console.log("deploy ok, ret: ", ret);
                         }

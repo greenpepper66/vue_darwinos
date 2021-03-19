@@ -46,6 +46,7 @@ var vue_node = {
                         let model_file = node.file_list[j];
                         // 模型文件状态值：0-ready, 1-已删除, 2-processing(下位机没使用), 3-running
                         if (model_file['model_status'] != 1 && model_file['model_size'] != 0) {
+
                             let model = {
                                 id: model_file["model_id"],
                                 name: model_file["model_name"],
@@ -57,15 +58,15 @@ var vue_node = {
                             _this.modelFileList.push(model);
 
                             // 获取任务列表
-                            if(model.status == 3) {
+                            if (model.status == 3) {
                                 _this.taskFileList.push(model);
                             }
                         }
-                        
+
                     }
 
                     _this.nodeInfo = node;
-                    console.log("call back: modelFilelist and nodeInfo ", _this.modelFileList,  _this.nodeInfo);
+                    console.log("call back: modelFilelist and nodeInfo ", _this.modelFileList, _this.nodeInfo);
                     break;
                 }
             }
