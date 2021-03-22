@@ -198,6 +198,16 @@ function pltHeatmap(elementId, row_num, col_num) {
   return myChart;
 }
 
+
+/**
+ * 芯片散点图
+ * @param {*} elementId  div ID
+ * @param {*} row_num 行数
+ * @param {*} col_num 列数
+ * @param {*} data    数据
+ * @param {*} symbolSize   点的大小
+ * @param {*} color_map    颜色
+ */
 function pltEffectScatter(
   elementId,
   row_num,
@@ -205,9 +215,9 @@ function pltEffectScatter(
   data,
   symbolSize = 10,
   color_map = {
-    0: "rgba(0,255,0, 0.5)",
-    1: "rgba(255,255,0, 0.5)",
-    "-1": "rgba(255,0,0, 0.5)",
+    0: "#45b700",
+    1: "#FF9700",
+    "-1": " #FF4530",
     "-2": "rgba(200,200,200, 0.5)",
   }
   /* color_map: 0(空闲)，1（工作），-1（输出），-2（离线）*/
@@ -238,26 +248,33 @@ function pltEffectScatter(
   // 指定图表的配置项和数据
   let option = {
     // backgroundColor: "white",
-    grid: {
-      show: true,
+    grid: {   // grid属性控制边距
+      top: '0%',
+      left: '3%',
+      right: '3%',
+      bottom: '3%',
+      containLabel: true,  // 是否显示刻度标签
+    },
+    tooltip: {
+      formatter: '({c})'   // 鼠标悬浮显示坐标
     },
     xAxis: {
       type: "category",
       min: 0,
-      max: col_num,
+      max: col_num - 1,
       splitLine: {
-        show: true,
-        interval: 23,
+        show: false,
+        interval: 24,
         lineStyle: {
           color: "rgba(0,0,0,0.1)",
           width: 2,
         },
       },
       axisLine: {
-        show: false,
+        show: true,  // 显示坐标轴刻度线
       },
       axisLabel: {
-        show: false,
+        show: true,
       },
       axisTick: {
         show: false,
@@ -268,18 +285,18 @@ function pltEffectScatter(
       min: 0,
       max: row_num,
       splitLine: {
-        show: true,
-        interval: 23,
+        show: false, //不显示分隔线
+        interval: 3,
         lineStyle: {
           color: "rgba(0,0,0,0.1)",
           width: 2,
         },
       },
       axisLine: {
-        show: false,
+        show: true,
       },
       axisLabel: {
-        show: false,
+        show: true,
       },
       axisTick: {
         show: false,

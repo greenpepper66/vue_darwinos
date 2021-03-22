@@ -78,7 +78,7 @@ function buildOption() {
                         shape: {
                             cx: point.x,
                             cy: point.y,
-                            r: 4
+                            r: 6
                         },
                         style: {
                             stroke: "#855fff",
@@ -128,7 +128,7 @@ function buildOption() {
                         shape: {
                             cx: point.x,
                             cy: point.y,
-                            r: 4
+                            r: 6
                         },
                         style: {
                             stroke: "#ac776f",
@@ -203,7 +203,7 @@ function buildOption() {
                         shape: {
                             cx: point.x,
                             cy: point.y,
-                            r: 4
+                            r: 6
                         },
                         style: {
                             stroke: "#FF8E89", //粉
@@ -227,7 +227,7 @@ function buildOption() {
                         shape: {
                             cx: point.x,
                             cy: point.y,
-                            r: 4
+                            r: 6
                         },
                         style: {
                             stroke: "#0CD3DB", //绿

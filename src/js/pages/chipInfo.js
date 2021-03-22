@@ -42,16 +42,20 @@ var vue_chip = {
             _this.update_heatmap();
 
             // 画饼图
-            // _this.updatePieEchart();
+            _this.updatePieEchart();
 
         });
 
         // test 画图
+        let data = [];
+        for (let i = 0; i < 24; i++) {
+            for (let j = 0; j < 24; j++) {
+                data.push([j, i, 0]);
+            }
+        }
+        pltEffectScatter("heatmap", 24, 24, data, 8);
         drawChipEchart(0, _this.chipID);
 
-
-        // test
-        // _this.board_ip = "192.168.1.4";
 
         // 持续连接用的？
         let websocket_server_ip = "";

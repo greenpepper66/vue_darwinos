@@ -60,7 +60,7 @@
 
     <div class="clearfix thewrap middle2">
       <div class="quarter-div echart">
-        膜电压曲线图 - 神经元坐标：(
+        膜电位曲线图 - 神经元坐标：(
           <span id="neur_x1">{{ selected_neur_x }}</span>,
           <span id="neur_y1">{{ selected_neur_y }}</span>
           )， 编号: <input type="text" v-model="neurIndex" style="width: 6%" />
@@ -69,7 +69,7 @@
       </div>
 
       <div class="quarter-div echart">
-        膜电压趋势图 - 神经元坐标：(
+        膜电位趋势图 - 神经元坐标：(
           <span id="neur_x2">{{ selected_neur_x }}</span>,
           <span id="neur_y2">{{ selected_neur_y }}</span>
           )， 编号:{{ neurIndex }}
@@ -78,10 +78,10 @@
       </div>
     </div>
 
-    <div class="clearfix thewrap bottom">
+    <!-- <div class="clearfix thewrap bottom">
       <span>任务统计信息</span>
       <hr />
-    </div>
+    </div> -->
   </div>
 </template>
 

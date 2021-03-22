@@ -195,11 +195,13 @@ table.home_hovertable td {
   background-color: #f5f5f5;
 }
 
-.node_chips, .node_infor {
+.node_chips,
+.node_infor {
   margin-right: 10px;
 }
 
-.node_title, .chip_title {
+.node_title,
+.chip_title {
   font-family: SourceHanSansCN-Normal;
   font-size: 20px;
   color: #333333;
@@ -208,7 +210,8 @@ table.home_hovertable td {
   margin-bottom: 28px;
 }
 
-.node_models, .node_tasks {
+.node_models,
+.node_tasks {
   margin-left: 10px;
 }
 
@@ -231,11 +234,12 @@ table.node_page_table tr {
   border-width: 2px;
   padding: 8px;
   border-style: solid;
-  border-color: #D6D6D6;
+  border-color: #d6d6d6;
   height: 40px;
 }
 
-table, td {
+table,
+td {
   border-collapse: collapse;
 }
 
@@ -261,7 +265,8 @@ table, td {
   background-color: #f5f5f5;
 }
 
-.chip_matrix, .chip_infor {
+.chip_matrix,
+.chip_infor {
   margin-right: 10px;
 }
 
@@ -287,4 +292,36 @@ table, td {
 
 .chip_nodata_logo {
   height: 100px;
+}
+.chip_heatmap_div {
+  background: rgba(238,238,238,1.00);
+}
+
+/** 神经元状态图图标 **/
+.chip_coommonNeureLogo {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  /* 修改元素基线 同行显示*/
+  border-radius: 50%;
+}
+
+.freeNeureLogo {
+  background-color: #45b700;
+}
+.runNeureLogo {
+  background-color: #FF9700;
+}
+.outputNeureLogo {
+  background-color: #FF4530;
+}
+.chip_neure_logoBox {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}
+
+.chip_logoDesc {
+  margin-right: 30px;
+  vertical-align: middle;
 }

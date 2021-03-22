@@ -11,7 +11,16 @@
         <span id="chipIDValue" style="display: none">
           {{ $route.query.chipID }}
         </span>
-        <div id="heatmap"></div>
+        <div id="heatmap" class="chip_heatmap_div"></div>
+
+        <div class="chip_neure_logoBox">
+          <div class="chip_coommonNeureLogo freeNeureLogo"></div>
+          <span class="chip_logoDesc"> 空闲状态</span>
+          <div class="chip_coommonNeureLogo runNeureLogo"></div>
+          <span class="chip_logoDesc"> 运行状态</span>
+          <div class="chip_coommonNeureLogo outputNeureLogo"></div>
+          <span class="chip_logoDesc"> 输出神经元 </span>
+        </div>
       </div>
 
       <div class="chip_quarter-div chip_pie">
@@ -93,12 +102,11 @@
   </div>
 </template>
 
-
 <script>
 import { vue_chip } from "../js/pages/chipInfo";
 import $ from "jquery";
 
-$(function () {
+$(function() {
   var bodyH = $(window).height();
   console.log(bodyH);
   var h = bodyH / 2 - 70;
@@ -107,7 +115,6 @@ $(function () {
 
 export default vue_chip;
 </script>
-
 
 <style scoped>
 /*将页面分为4个部分*/
@@ -130,8 +137,8 @@ export default vue_chip;
 }
 
 #heatmap {
-  width: 100%;
-  height: 80%;
+  width: 90%;
+  height: 76%;
   margin: 0 auto;
   min-height: 300px;
 }
