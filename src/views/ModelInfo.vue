@@ -1,48 +1,65 @@
 <template>
-  <div class="model">
-    <div class="clearfix thewrap top">
-      <div class="search-box">
-        <div class="searchTitle quarter-search">按名称搜索：</div>
-        <div class="searchByName quarter-search">
-          <input
-            type="text"
-            id="searchByName"
-            class="inputBox"
-            placeholder="请输入模型名称"
-          />
-        </div>
-        <div class="searchTitle quarter-search">按类型搜索：</div>
-        <div class="searchByType quarter-search">
-          <input
-            type="text"
-            id="searchByType"
-            class="inputBox"
-            placeholder="请输入类型名称"
-          />
-        </div>
-        <div>
-          <button class="searchBtn quarter-search" @click="searchModles">
-            搜索
-          </button>
-        </div>
-      </div>
-
-      <div class="upload-box">
-        <button
-          type="button"
-          @click="goUploadModelPage($router)"
-          class="upload-button"
-        >
-          上传模型文件
-        </button>
+  <div class="model_page">
+    <div class="clearfix thewrap model_top">
+      <div class="row">
+        <table class="model_page_table-search">
+          <tbody>
+            <tr>
+              <td>
+                <div class="model_search_title">按名称搜索：</div>
+              </td>
+              <td>
+                <div class="">
+                  <input
+                    type="text"
+                    id="searchByName"
+                    class="model_inputBox"
+                    placeholder="请输入模型名称"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="model_search_title">按类型搜索：</div>
+              </td>
+              <td>
+                <div>
+                  <input
+                    type="text"
+                    id="searchByType"
+                    class="model_inputBox"
+                    placeholder="请输入类型名称"
+                  />
+                </div>
+              </td>
+              <td>
+                <div>
+                  <button class="model_search_btn" @click="searchModles">
+                    搜索
+                  </button>
+                </div>
+              </td>
+              <td colspan="2">
+                <div>
+                  <button
+                    type="button"
+                    @click="goUploadModelPage($router)"
+                    class="model_upload_btn"
+                  >
+                    上传模型文件
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="clearfix thewrap middle">
-      模型列表
-      <hr />
+    <div class="clearfix thewrap model_middle">
+      <div class="model_title">模型列表</div>
+
       <div class="row">
-        <table class="table">
+        <table class="model_page_table-list">
           <thead>
             <tr>
               <th>模型ID</th>
@@ -57,28 +74,31 @@
             <template v-if="modelFilesShowed.length == 0">
               <tr>
                 <template v-for="j in 6">
-                  <td width="10%" :key="j">-</td>
+                  <td :key="j">-</td>
                 </template>
               </tr>
             </template>
             <tr v-for="(model, index) in modelFilesShowed" :key="model.id">
-              <td width="10%">{{ model.id }}</td>
-              <td width="10%">{{ model.name }}</td>
-              <td width="10%">{{ model.nodeID }}</td>
-              <td width="10%">{{ model.nodeIP }}</td>
-              <td width="10%">{{ model.size }}</td>
-              <td width="25%">
+              <td>{{ model.id }}</td>
+              <td>{{ model.name }}</td>
+              <td>{{ model.nodeID }}</td>
+              <td>{{ model.nodeIP }}</td>
+              <td>{{ model.size }}</td>
+              <td>
                 <button
+                  class="model_deploy_btn"
                   :id="'task_deploy_' + index"
                   @click="task_deploy(model.nodeIP, model.id)"
                 >
                   部署
                 </button>
 
-                <button @click="task_delete(model.nodeIP, model.id)">
+                <button
+                  class="model_delete_btn"
+                  @click="task_delete(model.nodeIP, model.id)"
+                >
                   删除
                 </button>
-                <!-- <button @click="alert('test：模型详细信息')">详情</button> -->
               </td>
             </tr>
           </tbody>
@@ -86,12 +106,26 @@
       </div>
     </div>
 
-    <div class="clearfix thewrap bottom">
-      <span>模型资源统计信息</span>
-      <hr />
-      <div class="totalModels">
-        <span>模型文件总数：</span>
-        <span>{{ modelFilesShowed.length }}</span>
+    <div class="clearfix thewrap model_bottom">
+      <div class="model_title">模型资源统计信息</div>
+
+      <div class="row">
+        <table class="model_page_table-total">
+          <tbody>
+            <tr>
+              <td>模型文件总数：</td>
+              <td>{{ modelFilesShowed.length }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -99,7 +133,10 @@
       <!-- <p>示例弹出层：<button @click="showDeployResult()">请点这里</button></p> -->
       <div id="deployResult" class="alert-box">
         <p align="center">部署结果：{{ modelDeployResult }}</p>
-        <a href="javascript:void(0)" @click="closeDeployResult()" style="float: right"
+        <a
+          href="javascript:void(0)"
+          @click="closeDeployResult()"
+          style="float: right"
           >关闭</a
         >
       </div>
@@ -111,7 +148,7 @@
 import { vue_model } from "../js/pages/modelInfo";
 import $ from "jquery";
 
-$(function () {
+$(function() {
   var bodyH = $(window).height();
   console.log(bodyH);
   $(".middle").height(bodyH - 600);
@@ -119,7 +156,6 @@ $(function () {
 
 export default vue_model;
 </script>
-
 
 <style>
 .clearfix:before,
@@ -139,79 +175,5 @@ export default vue_model;
   padding-right: 20px;
   box-sizing: border-box;
   overflow: auto;
-}
-.top {
-  height: 100px;
-}
-.middle {
-  min-height: 400px;
-}
-.bottom {
-  height: 160px;
-}
-.table {
-  margin: 0 auto;
-}
-
-.upload-box {
-  width: 20%;
-  height: 60%;
-  float: right;
-  margin: 0 auto;
-  display: inline;
-  margin-top: 20px;
-}
-.upload-button {
-  width: 200px;
-  height: 40px;
-  display: block;
-  margin: 0 auto;
-  border-width: 0;
-}
-
-.totalModels {
-  height: 30px;
-  margin-left: 30px;
-  text-align: left;
-}
-
-/* 下面是搜索框样式 */
-.search-box {
-  height: 60%;
-  width: 80%;
-  float: left;
-  margin: 0 auto;
-  margin-top: 20px;
-  overflow: auto;
-}
-
-.quarter-search {
-  height: 35px;
-  width: 18%;
-  box-sizing: border-box;
-  float: left;
-  overflow: auto;
-}
-
-.searchByName,
-.searchByType {
-  margin-right: 20px;
-}
-.searchTitle {
-  margin-top: 7px;
-  text-align: right;
-}
-
-.inputBox {
-  height: 80%;
-  width: 80%;
-  float: left;
-}
-
-.searchBtn {
-  width: 100px;
-  height: 40px;
-  border: none;
-  float: center;
 }
 </style>

@@ -18,7 +18,7 @@ var vue_uploadModel = {
       {
         value: "AUTO",
         label: "AUTO",
-      },
+      }
     ];
 
     get_slave_boards(function (slave_boards) {
@@ -46,6 +46,11 @@ var vue_uploadModel = {
   methods: {
     closeUploadResult() {
       document.getElementById('uploadResult').style.display = 'none';
+    },
+    getUploadModelFile() {
+      let fullPath = document.getElementById("upload_file_input").value.split("\\");
+      let fileName = fullPath[fullPath.length - 1];
+      document.getElementById("uploadModel_select_file_ret").value = fileName;
     },
 
     upload_file,
