@@ -118,6 +118,7 @@ var vue_model = {
         task_deploy(key_ip, model_id) {
             let _this = this;
             console.log("start deploy the model", this.modelDeployResult);
+            
             $.post(
                 "http://" + key_ip + "/choosed_config/",
                 {

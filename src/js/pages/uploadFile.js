@@ -18,7 +18,7 @@ var vue_uploadModel = {
       {
         value: "AUTO",
         label: "AUTO",
-      }
+      },
     ];
 
     get_slave_boards(function (slave_boards) {

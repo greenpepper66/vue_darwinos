@@ -4,23 +4,6 @@ body {
   font-size: 16px;
 }
 
-/* button {
-  background-color: rgb(230, 230, 230);
-  color: black;
-} */
-
-/* button:hover {
-  background-color: #497fdf;
-} */
-
-input {
-  background: rgb(230, 230, 230);
-  color: black;
-}
-
-hr {
-  color: rgb(230, 230, 230);
-}
 
 /** light 弹出框样式 **/
 
@@ -52,10 +35,16 @@ hr {
   background-color: rgb(230, 230, 230);
 }
 
-/** UI设计后调整 **/
-
+/**********************************************************************************************
+** UI设计后调整
+** 0. common style
+**********************************************************************************************/
 #app {
   margin: 25px;
+}
+table,
+td {
+  border-collapse: collapse; /** 合并单元格边框 */
 }
 
 /**********************************************************************************************
@@ -239,10 +228,7 @@ table.node_page_table tr {
   height: 50px;
 }
 
-table,
-td {
-  border-collapse: collapse; /** 合并单元格边框 */
-}
+
 
 .node_nodata_box {
   text-align: center;
@@ -494,6 +480,43 @@ table.model_page_table-total td {
   height: 30px;
 }
 
+/** 模型部署结果弹出框 **/
+.model_deploy_alert-box {
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  font-size: 22px;
+  color: #333333;
+  letter-spacing: 1.6px;
+
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  height: 30%;
+  padding: 10px;
+  z-index: 1002;
+  overflow: auto;
+}
+.model_deploy_alert-txt {
+  font-size: 22px;
+  color: #333333;
+  letter-spacing: 1.6px;
+  margin-top: 15%;
+}
+.model_deploy_alert-btn {
+  background-image: linear-gradient(180deg, #afd1ff 0%, #77a4ff 100%);
+  border-radius: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 1.14px;
+  height: 47px;
+  width: 20%;
+  background-color: Transparent; /** 使得button没有边框 **/
+  border-style: none;
+  margin-top: 10%;
+}
 /**********************************************************************************************
 ** 5. 上传模型页
 **********************************************************************************************/
@@ -507,7 +530,7 @@ table.uploadModel_page_table {
   margin-right: 20px;
   font-size: 14px;
   color: #666666;
-  width: 60%;
+  width: 80%;
   margin: auto;
   margin-top: 35px;
 }
@@ -533,17 +556,16 @@ table.uploadModel_page_table tr td:nth-child(3) {
   color: #ffffff;
   letter-spacing: 0.91px;
   height: 36px;
-  width: 111px;
+  width: 40%;
   float: left;
   margin-top: 10px;
   margin-left: 20px;
 }
 .uploadModel_select_file_txt {
   height: 30px;
-  width: 160px;
+  width: 45%;
   float: left;
   margin-top: 12px;
-  margin-left: 20px;
   background-color: Transparent; /** 使得button没有边框 **/
   border-style: none;
   font-size: 16px;
@@ -590,4 +612,41 @@ table.uploadModel_page_table tr td:nth-child(3) {
   color: #333333;
   letter-spacing: 0.91px;
   vertical-align: middle;
+}
+/** 模型文件上传结果弹出框 **/
+.uploadModel_alert-box {
+  background-color: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  font-size: 22px;
+  color: #333333;
+  letter-spacing: 1.6px;
+
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  height: 30%;
+  padding: 10px;
+  z-index: 1002;
+  overflow: auto;
+}
+.uploadModel_alert-txt {
+  font-size: 22px;
+  color: #333333;
+  letter-spacing: 1.6px;
+  margin-top: 15%;
+}
+.uploadModel_alert-btn {
+  background-image: linear-gradient(180deg, #afd1ff 0%, #77a4ff 100%);
+  border-radius: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 1.14px;
+  height: 47px;
+  width: 20%;
+  background-color: Transparent; /** 使得button没有边框 **/
+  border-style: none;
+  margin-top: 10%;
 }

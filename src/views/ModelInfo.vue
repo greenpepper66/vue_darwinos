@@ -131,14 +131,13 @@
 
     <div>
       <!-- <p>示例弹出层：<button @click="showDeployResult()">请点这里</button></p> -->
-      <div id="deployResult" class="alert-box">
-        <p align="center">部署结果：{{ modelDeployResult }}</p>
-        <a
-          href="javascript:void(0)"
-          @click="closeDeployResult()"
-          style="float: right"
-          >关闭</a
-        >
+      <div id="deployResult" class="model_deploy_alert-box">
+        <p align="center" class="model_deploy_alert-txt">
+          部署结果：{{ modelDeployResult }}
+        </p>
+        <button class="model_deploy_alert-btn" @click="closeDeployResult()">
+          关闭
+        </button>
       </div>
     </div>
   </div>

@@ -13,7 +13,7 @@
                     id="uploadModel_select_file"
                     onclick="upload_file_input.click();"
                   >
-                    选择文件
+                    选择模型文件
                   </button>
                   <input
                     type="file"
@@ -92,14 +92,9 @@
     </div>
 
     <div>
-      <div id="uploadResult" class="alert-box">
-        <p align="center" id="modelUploadResult"></p>
-        <a
-          href="javascript:void(0)"
-          @click="closeUploadResult()"
-          style="float: right"
-          >关闭</a
-        >
+      <div id="uploadResult" class="uploadModel_alert-box">
+        <p align="center" class="uploadModel_alert-txt" id="modelUploadResult"></p>
+        <button class="uploadModel_alert-btn" @click="closeUploadResult()">关闭</button>
       </div>
     </div>
   </div>
