@@ -85,6 +85,17 @@ var vue_taskDetail = {
             );
 
         }, 6000);
+
+
+        // test 画图
+        let data = [];
+        for (let i = 0; i < 24; i++) {
+            for (let j = 0; j < 24; j++) {
+                data.push([j, i, 0]);
+            }
+        }
+        pltEffectScatter("taskChipEchart", 24, 24, data, 8);
+        // drawChipEchart(0, _this.chipID);
     },
 
     watch: {
@@ -187,14 +198,14 @@ var vue_taskDetail = {
                     this.selected_neur_x = Math.floor(coordinate[0]);
                     this.selected_neur_y = Math.floor(coordinate[1]);
                     console.log("选中了神经元，位置：", this.selected_neur_x, this.selected_neur_y);
-                    
+
                     // 页面元素赋值
                     document.getElementById("neur_x1").innerHTML = this.selected_neur_x;
                     document.getElementById("neur_y1").innerHTML = this.selected_neur_y;
                     document.getElementById("neur_x2").innerHTML = this.selected_neur_x;
                     document.getElementById("neur_y2").innerHTML = this.selected_neur_y;
                     //todo 重新绘图 莫电压
-                    
+
                 });
             });
         },

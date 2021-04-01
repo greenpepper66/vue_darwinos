@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <div id="nav"> -->
-      <!-- router-link定义页面中点击触发部分 -->
-      <!-- <router-link to="/">Home</router-link> |
+    <!-- router-link定义页面中点击触发部分 -->
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
       <router-link to="/node?nodeID=0">Node</router-link> |
       <router-link to="/chip?nodeID=0&chipID=3">Chip</router-link> |
       <router-link to="/model">Model</router-link> |
@@ -11,20 +11,19 @@
       <router-link to="/taskDetail?nodeID=0&modelID=7">TaskDetail</router-link>
       |
       <router-link to="/boardsData">BoardsData</router-link> |
-      <router-link to="/about">About</router-link> -->
-    <!-- </div> -->
+      <router-link to="/about">About</router-link>
+    </div>
     <!-- router-view定义页面中显示部分 -->
     <router-view />
   </div>
 </template>
-
 
 <script>
 import $ from "jquery";
 import { get_slave_boards } from "./js/os/get_slave_boards.js";
 import { get_chip_matrix } from "./js/os/get_chip_matrix";
 
-$(function () {
+$(function() {
   var bodyH = $(window).height();
   console.log(bodyH);
   var h = bodyH;
@@ -35,7 +34,7 @@ function updateTreeView() {
   let JSONdata = {
     nodes: [],
     models: [],
-    tasks: [],
+    tasks: []
   };
 
   //测试用
@@ -71,7 +70,7 @@ let task = {
           }
           JSONdata.tasks.push(task)  */
 
-  get_slave_boards(function (slave_boards) {
+  get_slave_boards(function(slave_boards) {
     for (let i = 0; i < slave_boards.length; i++) {
       let slave_board = slave_boards[i];
       if (slave_board["board_status"] == 1) {
@@ -80,7 +79,7 @@ let task = {
           id: slave_board["board_id"],
           chips: slave_board["chips"],
           usedNeureNums: [],
-          role: slave_board["board_role"], //节点角色，1-master, 2-shadow,3-slave
+          role: slave_board["board_role"] //节点角色，1-master, 2-shadow,3-slave
         };
         JSONdata.nodes.push(node);
 
@@ -96,7 +95,7 @@ let task = {
               id: model_file["model_id"],
               name: model_file["model_name"],
               nodeID: node.id,
-              nodeIP: node.ip,
+              nodeIP: node.ip
             };
             JSONdata.models.push(model);
           }
@@ -106,7 +105,7 @@ let task = {
               id: model_file["model_id"],
               name: model_file["model_name"],
               nodeID: node.id,
-              nodeIP: node.ip,
+              nodeIP: node.ip
             };
             JSONdata.tasks.push(task);
           }
@@ -121,12 +120,12 @@ let task = {
       method: "post",
       data: JSON.stringify(JSONdata),
       // dataType: "json",   // 加上这个会进入error分支，即使返回200
-      success: function (response) {
+      success: function(response) {
         console.log(response, "page post success");
       },
-      error: function (error) {
+      error: function(error) {
         console.error(error, "page post error");
-      },
+      }
     });
 
     // for (let i = 0; i < JSONdata.nodes.length; i++) {

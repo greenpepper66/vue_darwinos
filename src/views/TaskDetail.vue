@@ -1,16 +1,19 @@
 <template>
-  <div class="task">
-    <div class="clearfix thewrap top">
-      <span>任务基本信息</span>
+  <div class="taskDetail_page">
+    <div class="clearfix thewrap taskDetail_top">
+      <div class="row">
+        <div class="taskDetail_title">任务基本信息</div>
+      </div>
+
       <span id="nodeIDValue" style="display: none">
         {{ $route.query.nodeID }}
       </span>
       <span id="modelIDValue" style="display: none">
         {{ $route.query.modelID }}
       </span>
-      <hr />
+
       <div class="row">
-        <table class="table">
+        <table class="taskDetail_table">
           <thead>
             <tr>
               <th>模型名称</th>
@@ -25,56 +28,99 @@
             <template v-if="taskBaseInfo.length == 0">
               <tr>
                 <template v-for="i in 6">
-                  <td width="10%" :key="i">-</td>
+                  <td :key="i">-</td>
                 </template>
               </tr>
             </template>
-            <tr>
-              <td width="10%">{{ taskBaseInfo.name }}</td>
-              <td width="10%">{{ taskBaseInfo.id }}</td>
-              <td width="10%">{{ taskBaseInfo.nodeID }}</td>
-              <td width="10%">{{ nodeBaseInfo.ip }}</td>
-              <td width="10%">{{ taskBaseInfo.size }}</td>
-              <td width="10%">{{ taskBaseInfo.time }}</td>
-            </tr>
+            <template v-else>
+              <tr>
+                <td>{{ taskBaseInfo.name }}</td>
+                <td>{{ taskBaseInfo.id }}</td>
+                <td>{{ taskBaseInfo.nodeID }}</td>
+                <td>{{ nodeBaseInfo.ip }}</td>
+                <td>{{ taskBaseInfo.size }}</td>
+                <td>{{ taskBaseInfo.time }}</td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="clearfix thewrap middle1">
-      <p>任务运行图示</p>
-      <div class="quarter-div echart">
-        神经元状态图 - 节点IP:{{ nodeBaseInfo.ip }} , 芯片ID:
-        <input type="text" v-model="chipID" style="width: 6%" />
-        <hr />
-        <div id="taskChipEchart"></div>
+    <div class="clearfix thewrap taskDetail_middle">
+      <div class="row">
+        <div class="taskDetail_title">任务运行图示</div>
       </div>
 
-      <div class="quarter-div echart">
-        <span>识别时间</span>
-        <hr />
-        <div id="taskTimeEchart"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="taskDetail_echart_title">
+            神经元状态图 - 节点IP:{{ nodeBaseInfo.ip }} , 芯片ID:
+            <input
+              type="text"
+              v-model="chipID"
+              class="taskDetail_echart_input"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="taskDetail_echart_title">识别时间</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 taskDetail_echart_box">
+          <div id="taskChipEchart" class="taskDetail_chipEchart"></div>
+
+          <div class="chip_neure_logoBox">
+            <div class="chip_coommonNeureLogo freeNeureLogo"></div>
+            <span class="chip_logoDesc"> 空闲状态</span>
+            <div class="chip_coommonNeureLogo runNeureLogo"></div>
+            <span class="chip_logoDesc"> 运行状态</span>
+            <div class="chip_coommonNeureLogo outputNeureLogo"></div>
+            <span class="chip_logoDesc"> 输出神经元 </span>
+          </div>
+        </div>
+
+        <div class="col-md-6 taskDetail_echart_box">
+          <div id="taskTimeEchart"></div>
+        </div>
       </div>
     </div>
 
-    <div class="clearfix thewrap middle2">
-      <div class="quarter-div echart">
-        膜电位曲线图 - 神经元坐标：(
-          <span id="neur_x1">{{ selected_neur_x }}</span>,
-          <span id="neur_y1">{{ selected_neur_y }}</span>
-          )， 编号: <input type="text" v-model="neurIndex" style="width: 6%" />
-        <hr />
-        <div id="MembraneVoltageEchart"></div>
+    <div class="clearfix thewrap taskDetail_middle">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="taskDetail_echart_title">
+            膜电位曲线图 - 神经元坐标：(
+            <span id="neur_x1">{{ selected_neur_x }}</span
+            >, <span id="neur_y1">{{ selected_neur_y }}</span> )， 编号:
+            <input
+              type="text"
+              v-model="neurIndex"
+              class="taskDetail_echart_input"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="taskDetail_echart_title">
+            膜电位趋势图 - 神经元坐标：(
+            <span id="neur_x2">{{ selected_neur_x }}</span
+            >,
+            <span id="neur_y2">{{ selected_neur_y }}</span>
+            )， 编号:{{ neurIndex }}
+          </div>
+        </div>
       </div>
 
-      <div class="quarter-div echart">
-        膜电位趋势图 - 神经元坐标：(
-          <span id="neur_x2">{{ selected_neur_x }}</span>,
-          <span id="neur_y2">{{ selected_neur_y }}</span>
-          )， 编号:{{ neurIndex }}
-        <hr />
-        <div id="MembraneVoltageLineEchart"></div>
+      <div class="row">
+        <div class="col-md-6 taskDetail_echart_box">
+          <div id="MembraneVoltageEchart"></div>
+        </div>
+
+        <div class="col-md-6 taskDetail_echart_box">
+          <div id="MembraneVoltageLineEchart"></div>
+        </div>
       </div>
     </div>
 
@@ -89,7 +135,7 @@
 import { vue_taskDetail } from "../js/pages/taskDetail";
 import $ from "jquery";
 
-$(function () {
+$(function() {
   var bodyH = $(window).height();
   console.log(bodyH);
   $(".middle").height(bodyH - 600);
@@ -98,8 +144,9 @@ $(function () {
 export default vue_taskDetail;
 </script>
 
-
 <style>
+@import "../lib/bootstrap-3.3.1/css/bootstrap.min.css";
+
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -118,53 +165,12 @@ export default vue_taskDetail;
   box-sizing: border-box;
   overflow: auto;
 }
-.quarter-div {
-  width: 50%;
-  box-sizing: border-box;
-  float: left;
-  overflow: auto;
-}
-.top {
-  height: 200px;
-  overflow: auto;
-}
-.middle1 {
-  min-height: 350px;
-}
-.middle2 {
-  min-height: 350px;
-}
-.bottom {
-  height: 100px;
-}
-.table {
-  margin: 0 auto;
-}
-.taskInfo-box {
-  height: 60%;
-  width: 100%;
-  float: left;
-  margin: 0 auto;
-  display: inline;
-  margin-top: 20px;
-}
-.echart {
-  min-height: 320px;
-}
-.totalTasks {
-  height: 30px;
-  margin-left: 30px;
-  text-align: left;
-}
+
 #taskChipEchart,
 #taskTimeEchart,
 #MembraneVoltageEchart,
 #MembraneVoltageLineEchart {
-  height: 300px;
+  height: 330px;
   margin: 0 auto;
-  width: 300px;
-}
-hr {
-  width: 90%;
 }
 </style>
