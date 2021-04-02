@@ -1,46 +1,19 @@
-body {
-  background-color: white;
-  color: black;
-  font-size: 16px;
-}
-
-/** light 弹出框样式 **/
-
-.black_overlay {
-  display: none;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  z-index: 1001;
-  -moz-opacity: 0.8;
-  opacity: 0.8;
-  filter: alpha(opacity=88);
-}
-
-.alert-box {
-  display: none;
-  position: absolute;
-  top: 25%;
-  left: 30%;
-  width: 40%;
-  height: 10%;
-  padding: 10px;
-  border: 6px solid rgb(200, 200, 200);
-  z-index: 1002;
-  overflow: auto;
-  background-color: rgb(230, 230, 230);
-}
 
 /**********************************************************************************************
 ** UI设计后调整
 ** 0. common style
 **********************************************************************************************/
-#app {
+
+.home_page,
+.nodeInfo_page,
+.chipInfo_page,
+.model_page {
   margin: 25px;
+  min-height: 1000px;
+  text-align: center;
 }
+
+
 table,
 td {
   border-collapse: collapse; /** 合并单元格边框 */
@@ -176,12 +149,12 @@ table.home_hovertable td {
 **********************************************************************************************/
 
 .node_quarter-div {
-  width: 49%;
+  width: 48%;
   height: 500px;
   float: left;
-  overflow: auto;
   margin-bottom: 20px;
   background-color: #f5f5f5;
+ 
 }
 
 .node_chips {
@@ -189,6 +162,7 @@ table.home_hovertable td {
 }
 .node_infor {
   margin-right: 10px;
+  height: 600px;
 }
 
 .node_title,
@@ -206,14 +180,12 @@ table.home_hovertable td {
 }
 .node_tasks {
   margin-left: 10px;
+  height: 600px;
 }
 
-table.node_page_table {
-  margin-left: 20px;
-  margin-right: 20px;
+table.node_page_table { 
   font-size: 14px;
   color: #666666;
-  font-family: PingFangSC-Regular;
   width: 90%;
   margin: auto;
 }
@@ -221,6 +193,7 @@ table.node_page_table {
 table.node_page_table th {
   background: rgba(238, 238, 238, 1);
   height: 50px;
+  text-align: center;
 }
 
 table.node_page_table tr {
@@ -245,24 +218,26 @@ table.node_page_table tr {
 **********************************************************************************************/
 
 .chip_quarter-div {
-  width: 49%;
+  width: 48%;
   height: 500px;
   float: left;
-  overflow: auto;
   margin-bottom: 20px;
   background-color: #f5f5f5;
 }
 
-.chip_matrix,
-.chip_infor {
+.chip_matrix{
   margin-right: 10px;
 }
-
+.chip_infor {
+  margin-right: 10px;
+  height: 600px;
+}
 .chip_pie {
   margin-left: 10px;
 }
 .chip_tasks {
   margin-left: 10px;
+  height: 600px;
 }
 
 .chip_title {
@@ -390,7 +365,7 @@ table.model_page_table-search tr td:nth-child(5) {
 .model_middle {
   background: #f5f5f5;
   height: 40%;
-  min-height: 600px;
+  min-height: 800px;
 }
 .model_title {
   font-size: 20px;
@@ -429,7 +404,6 @@ table.model_page_table-list {
   margin-right: 20px;
   font-size: 14px;
   color: #666666;
-  font-family: PingFangSC-Regular;
   width: 90%;
   margin: auto;
   margin-bottom: 50px;
@@ -438,6 +412,7 @@ table.model_page_table-list {
 table.model_page_table-list th {
   background: rgba(238, 238, 238, 1);
   height: 50px;
+  text-align: center;
 }
 
 table.model_page_table-list tr {
@@ -525,6 +500,7 @@ table.model_page_table-total td {
   padding-top: 50px;
   min-height: 1300px;
   background-color: #f5f5f5;
+  margin: 25px;
 }
 table.uploadModel_page_table {
   margin-left: 20px;
@@ -658,13 +634,20 @@ table.uploadModel_page_table tr td:nth-child(3) {
 .taskDetail_page {
   background-color: #f5f5f5;
   text-align: center;
+  height: 1500px;
 }
-.taskDetail_title {
+.taskDetail_info_title {
   font-size: 20px;
   color: #333333;
   letter-spacing: 1.14px;
   margin-top: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+.taskDetail_draw_title {
+  font-size: 20px;
+  color: #333333;
+  letter-spacing: 1.14px;
+  margin-bottom: 10px;
 }
 table.taskDetail_table {
   width: 90%;
@@ -694,6 +677,7 @@ table.taskDetail_table tr {
   font-size: 20px;
   color: #333333;
   letter-spacing: 1.14px;
+  margin-top: 50px;
 }
 .taskDetail_echart_input {
   background: #eeeeee;
@@ -710,6 +694,6 @@ table.taskDetail_table tr {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.taskDetail_chipEchart {
+/* .taskDetail_chipEchart {
   background: rgba(238, 238, 238, 1);
-}
+} */

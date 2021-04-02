@@ -4,6 +4,432 @@ import { walk_data } from "../utils/utils";
 
 let echarts = require("echarts");
 
+
+/*************************************************************************************************
+ * 1. 芯片散点图
+ * @param {*} elementId  div ID
+ * @param {*} row_num 行数
+ * @param {*} col_num 列数
+ * @param {*} data    数据
+ * @param {*} symbolSize   点的大小
+ * @param {*} color_map    颜色
+ *************************************************************************************************/
+function pltEffectScatter(
+  elementId,
+  row_num,
+  col_num,
+  data,
+  symbolSize = 10,
+  color_map = {
+    0: "#45b700",
+    1: "#FF9700",
+    "-1": " #FF4530",
+    "-2": "rgba(200,200,200, 0.5)",
+  }
+  /* color_map: 0(空闲)，1（工作），-1（输出），-2（离线）*/
+) {
+
+  let dom = document.getElementById(elementId);
+  let existInstance = echarts.getInstanceByDom(dom);
+  if (existInstance) {
+    if (true) {
+      echarts.dispose(existInstance);
+    }
+  }
+
+  let myChart = echarts.init(dom);
+
+  console.log("begin draw")
+
+  let _data = [];
+  for (let i = 0; i < data.length; i++) {
+    let x = data[i][0];
+    let y = data[i][1];
+    let color_str = color_map[data[i][2]];
+    _data.push({
+      value: [x, y],
+      itemStyle: { color: color_str },
+    });
+  }
+  // 指定图表的配置项和数据
+  let option = {
+    // backgroundColor: "white",
+    grid: {   // grid属性控制边距
+      top: '0%',
+      left: '3%',
+      right: '3%',
+      bottom: '3%',
+      containLabel: true,  // 是否显示刻度标签
+    },
+    tooltip: {
+      formatter: '({c})'   // 鼠标悬浮显示坐标
+    },
+    xAxis: {
+      type: "category",
+      min: 0,
+      max: col_num - 1,
+      splitLine: {
+        show: false,
+        interval: 24,
+        lineStyle: {
+          color: "rgba(0,0,0,0.1)",
+          width: 2,
+        },
+      },
+      axisLine: {
+        show: true,  // 显示坐标轴刻度线
+      },
+      axisLabel: {
+        show: true,
+      },
+      axisTick: {
+        show: false,
+      },
+    },
+    yAxis: {
+      type: "category",
+      min: 0,
+      max: row_num,
+      splitLine: {
+        show: false, //不显示分隔线
+        interval: 3,
+        lineStyle: {
+          color: "rgba(0,0,0,0.1)",
+          width: 2,
+        },
+      },
+      axisLine: {
+        show: true,
+      },
+      axisLabel: {
+        show: true,
+      },
+      axisTick: {
+        show: false,
+      },
+    },
+    series: [
+      {
+        type: "scatter",
+        symbolSize: symbolSize,
+        data: _data,
+      },
+    ],
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+
+  return myChart;
+}
+
+
+/*************************************************************************************************
+ * 2. 画任务运行时间折线图
+ * @param {*} elementId 
+ * @param {*} data_list 
+ * @param {*} new_data 
+ * @param {*} y_lim 
+ * @param {*} max_duration 
+ *************************************************************************************************/
+function pltWalkLine(elementId, data_list, new_data, y_lim, max_duration = 60, x_name, y_name) {
+  walk_data(data_list, new_data);
+  let x_left = data_list[0][0];
+  let x_right = data_list[data_list.length - 1][0];
+  x_right = x_right > max_duration ? x_right : max_duration;
+  pltLineChart(elementId, data_list, [x_left, x_right], y_lim, x_name, y_name);
+}
+
+
+/*****************
+ * 折线图绘图函数
+ * @param {*} elementId
+ * @param {*} data
+ * @param {*} xlim
+ * @param {*} ylim
+ ******************/
+function pltLineChart(elementId, data, xlim = [0, 60], ylim = [null, null], x_Name, y_name) {
+
+  let dom = document.getElementById(elementId);
+  let existInstance = echarts.getInstanceByDom(dom);
+  if (existInstance) {
+    if (true) {
+      echarts.dispose(existInstance);
+    }
+  }
+
+  let myChart = echarts.init(dom);
+
+  let splitLine = {
+    show: true,
+    lineStyle: {
+      color: "#d6d6d6",
+    },
+  };
+
+  let minorSplitLine = {
+    show: false,
+    lineStyle: {
+      color: "#ddd",
+    },
+  };
+  // if (typeof data == "undefined" || data.length == 0) {
+  //   data.push([0, 0, 0]);
+  // }
+  let option = {
+    // backgroundColor: "white",
+    animation: false,
+    grid: {
+      // 调整表格边距 和 大小
+      height: "80%",
+      top: "10%",
+      left: "10%",
+      bottom: "3%",
+      right: "10%",
+    },
+    tooltip: {
+      trigger: "item",
+      axisPointer: {
+        type: "cross",
+      },
+      formatter: (p) => {
+        try {
+          return p.dataIndex + ": " + p.data[1].toFixed(4);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
+    xAxis: {
+      // type: "category",
+      type: "value",
+      name: x_Name,
+      minorTick: {
+        show: true,
+      },
+      min: xlim[0],
+      max: xlim[1],
+      // splitNumber: 12,
+      splitLine: splitLine,
+      minorSplitLine: minorSplitLine,
+      axisLabel: {
+        interval: 9,
+        showMaxLabel: true,
+      },
+      data: new Array(xlim[1])
+        .toString()
+        .split(",")
+        .map((item, index) => index),
+    },
+    yAxis: {
+      name: y_name,
+      min: ylim[0],
+      max: ylim[1],
+      minorTick: {
+        show: true,
+      },
+      splitLine: splitLine,
+      minorSplitLine: minorSplitLine,
+    },
+    series: [
+      {
+        type: "line",
+        animation: false,
+        clip: true,
+        symbol: "none",
+        // smooth: true,
+        lineStyle: {
+          normal: {
+            color: "#FF994B", // 线条颜色
+          },
+        },
+        data: data,
+      },
+    ],
+  };
+  myChart.setOption(option);
+  return myChart;
+}
+
+
+/*************************************************************************************************
+ * 3. 画 膜电位曲线图
+ * @param {*} elementId 
+ * @param {*} data_array 
+ * @param {*} y_lim 
+ *************************************************************************************************/
+function pltArrayScatter(elementId, data_array, y_lim) {
+  let _data = [];
+  for (let i = 0; i < data_array.length; i++) {
+    _data.push([i, data_array[i]]);
+  }
+  pltScatterChart(elementId, _data, [0, data_array.length], y_lim);
+}
+
+/*****************
+ * 散点图 绘图函数
+ * @param {*} elementId
+ * @param {*} data
+ * @param {*} xlim
+ * @param {*} ylim
+  ******************/
+function pltScatterChart(elementId, data, xlim = [0, 60], ylim = [null, null]) {
+  let dom = document.getElementById(elementId);
+  let existInstance = echarts.getInstanceByDom(dom);
+  if (existInstance) {
+    if (true) {
+      echarts.dispose(existInstance);
+    }
+  }
+
+  let myChart = echarts.init(dom);
+
+  let splitLine = {
+    show: true,
+    lineStyle: {
+      color: "#d6d6d6",
+    },
+  };
+
+  let minorSplitLine = {
+    show: false,
+    lineStyle: {
+      color: "#ddd",
+    },
+  };
+  // if (typeof data == "undefined" || data.length == 0) {
+  //   data.push([0, 0, 0]);
+  // }
+  let option = {
+    // backgroundColor: "white",
+    animation: false,
+    grid: {
+      // 调整表格边距 和 大小
+      height: "80%",
+      top: "10%",
+      left: "10%",
+      bottom: "3%",
+      right: "10%",
+    },
+    tooltip: {
+      trigger: "item",
+      axisPointer: {
+        type: "cross",
+      },
+      formatter: (p) => {
+        try {
+          return p.dataIndex + ": " + p.data[1].toFixed(4);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
+    xAxis: {
+      // type: "category",
+      type: "value",
+      name: "采样",
+      minorTick: {
+        show: true,
+      },
+      min: xlim[0],
+      max: xlim[1],
+      // splitNumber: 12,
+      splitLine: splitLine,
+      minorSplitLine: minorSplitLine,
+      axisLabel: {
+        interval: 9,
+        showMaxLabel: true,
+      },
+      data: new Array(xlim[1])
+        .toString()
+        .split(",")
+        .map((item, index) => index),
+    },
+    yAxis: {
+      name: "电压/mv",
+      min: ylim[0],
+      max: ylim[1],
+      minorTick: {
+        show: true,
+      },
+      splitLine: splitLine,
+      minorSplitLine: minorSplitLine,
+    },
+    series: [
+      {
+        name: "scatter",
+        type: "scatter",
+        emphasis: {   // itemStyle的emphasis是鼠标 hover 时候的高亮样式
+          label: {
+            show: false,
+            position: "left",
+            color: "#FF994B",
+            fontSize: 40,
+          },
+        },
+        symbolSize: 5,
+        data: data,
+        itemStyle: {   
+          color: '#FF994B', // 点的颜色
+      }
+      },
+    ],
+  };
+  myChart.setOption(option);
+  return myChart;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function plt_heatmap(
   elementId,
   row_num,
@@ -199,123 +625,7 @@ function pltHeatmap(elementId, row_num, col_num) {
 }
 
 
-/**
- * 芯片散点图
- * @param {*} elementId  div ID
- * @param {*} row_num 行数
- * @param {*} col_num 列数
- * @param {*} data    数据
- * @param {*} symbolSize   点的大小
- * @param {*} color_map    颜色
- */
-function pltEffectScatter(
-  elementId,
-  row_num,
-  col_num,
-  data,
-  symbolSize = 10,
-  color_map = {
-    0: "#45b700",
-    1: "#FF9700",
-    "-1": " #FF4530",
-    "-2": "rgba(200,200,200, 0.5)",
-  }
-  /* color_map: 0(空闲)，1（工作），-1（输出），-2（离线）*/
-) {
 
-  let dom = document.getElementById(elementId);
-  let existInstance = echarts.getInstanceByDom(dom);
-  if (existInstance) {
-    if (true) {
-      echarts.dispose(existInstance);
-    }
-  }
-
-  let myChart = echarts.init(dom);
-
-  console.log("begin draw")
-
-  let _data = [];
-  for (let i = 0; i < data.length; i++) {
-    let x = data[i][0];
-    let y = data[i][1];
-    let color_str = color_map[data[i][2]];
-    _data.push({
-      value: [x, y],
-      itemStyle: { color: color_str },
-    });
-  }
-  // 指定图表的配置项和数据
-  let option = {
-    // backgroundColor: "white",
-    grid: {   // grid属性控制边距
-      top: '0%',
-      left: '3%',
-      right: '3%',
-      bottom: '3%',
-      containLabel: true,  // 是否显示刻度标签
-    },
-    tooltip: {
-      formatter: '({c})'   // 鼠标悬浮显示坐标
-    },
-    xAxis: {
-      type: "category",
-      min: 0,
-      max: col_num - 1,
-      splitLine: {
-        show: false,
-        interval: 24,
-        lineStyle: {
-          color: "rgba(0,0,0,0.1)",
-          width: 2,
-        },
-      },
-      axisLine: {
-        show: true,  // 显示坐标轴刻度线
-      },
-      axisLabel: {
-        show: true,
-      },
-      axisTick: {
-        show: false,
-      },
-    },
-    yAxis: {
-      type: "category",
-      min: 0,
-      max: row_num,
-      splitLine: {
-        show: false, //不显示分隔线
-        interval: 3,
-        lineStyle: {
-          color: "rgba(0,0,0,0.1)",
-          width: 2,
-        },
-      },
-      axisLine: {
-        show: true,
-      },
-      axisLabel: {
-        show: true,
-      },
-      axisTick: {
-        show: false,
-      },
-    },
-    series: [
-      {
-        type: "scatter",
-        symbolSize: symbolSize,
-        data: _data,
-      },
-    ],
-  };
-
-  // 使用刚指定的配置项和数据显示图表。
-  myChart.setOption(option);
-
-  return myChart;
-}
 
 // plot line chart, all data updated
 function plt_static_line(elementId, data, xlim = [-200, 200]) {
@@ -564,224 +874,10 @@ function buildLineChart2(elementId) {
   return myChart;
 }
 
-/**
- * 折线图绘图函数
- * @param {*} elementId
- * @param {*} data
- * @param {*} xlim
- * @param {*} ylim
- */
-function pltLineChart(elementId, data, xlim = [0, 60], ylim = [null, null]) {
 
-  let dom = document.getElementById(elementId);
-  let existInstance = echarts.getInstanceByDom(dom);
-  if (existInstance) {
-    if (true) {
-      echarts.dispose(existInstance);
-    }
-  }
 
-  let myChart = echarts.init(dom);
 
-  let splitLine = {
-    show: true,
-    lineStyle: {
-      color: "#999",
-    },
-  };
 
-  let minorSplitLine = {
-    show: true,
-    lineStyle: {
-      color: "#ddd",
-    },
-  };
-  // if (typeof data == "undefined" || data.length == 0) {
-  //   data.push([0, 0, 0]);
-  // }
-  let option = {
-    backgroundColor: "white",
-    animation: false,
-    grid: {
-      // 调整表格边距 和 大小
-      height: "70%",
-      top: "10%",
-      left: "20%",
-    },
-    tooltip: {
-      trigger: "item",
-      axisPointer: {
-        type: "cross",
-      },
-      formatter: (p) => {
-        try {
-          return p.dataIndex + ": " + p.data[1].toFixed(4);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    },
-    xAxis: {
-      // type: "category",
-      type: "value",
-      name: "x",
-      minorTick: {
-        show: true,
-      },
-      min: xlim[0],
-      max: xlim[1],
-      // splitNumber: 12,
-      splitLine: splitLine,
-      minorSplitLine: minorSplitLine,
-      axisLabel: {
-        interval: 9,
-        showMaxLabel: true,
-      },
-      data: new Array(xlim[1])
-        .toString()
-        .split(",")
-        .map((item, index) => index),
-    },
-    yAxis: {
-      name: "y",
-      min: ylim[0],
-      max: ylim[1],
-      minorTick: {
-        show: true,
-      },
-      splitLine: splitLine,
-      minorSplitLine: minorSplitLine,
-    },
-    series: [
-      {
-        type: "line",
-        animation: false,
-        clip: true,
-        symbol: "none",
-        // smooth: true,
-        data: data,
-      },
-    ],
-  };
-  myChart.setOption(option);
-  return myChart;
-}
-
-/**
- * 折线图绘图函数
- * @param {*} elementId
- * @param {*} data
- * @param {*} xlim
- * @param {*} ylim
- */
-function pltScatterChart(elementId, data, xlim = [0, 60], ylim = [null, null]) {
-  let dom = document.getElementById(elementId);
-  let existInstance = echarts.getInstanceByDom(dom);
-  if (existInstance) {
-    if (true) {
-      echarts.dispose(existInstance);
-    }
-  }
-
-  let myChart = echarts.init(dom);
-
-  let splitLine = {
-    show: true,
-    lineStyle: {
-      color: "#999",
-    },
-  };
-
-  let minorSplitLine = {
-    show: true,
-    lineStyle: {
-      color: "#ddd",
-    },
-  };
-  // if (typeof data == "undefined" || data.length == 0) {
-  //   data.push([0, 0, 0]);
-  // }
-  let option = {
-    backgroundColor: "white",
-    animation: false,
-    grid: {
-      // 调整表格边距 和 大小
-      height: "70%",
-      top: "10%",
-      left: "20%",
-    },
-    tooltip: {
-      trigger: "item",
-      axisPointer: {
-        type: "cross",
-      },
-      formatter: (p) => {
-        try {
-          return p.dataIndex + ": " + p.data[1].toFixed(4);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    },
-    xAxis: {
-      // type: "category",
-      type: "value",
-      name: "x",
-      minorTick: {
-        show: true,
-      },
-      min: xlim[0],
-      max: xlim[1],
-      // splitNumber: 12,
-      splitLine: splitLine,
-      minorSplitLine: minorSplitLine,
-      axisLabel: {
-        interval: 9,
-        showMaxLabel: true,
-      },
-      data: new Array(xlim[1])
-        .toString()
-        .split(",")
-        .map((item, index) => index),
-    },
-    yAxis: {
-      name: "y",
-      min: ylim[0],
-      max: ylim[1],
-      minorTick: {
-        show: true,
-      },
-      splitLine: splitLine,
-      minorSplitLine: minorSplitLine,
-    },
-    series: [
-      {
-        name: "scatter",
-        type: "scatter",
-        emphasis: {
-          label: {
-            show: true,
-            position: "left",
-            color: "blue",
-            fontSize: 40,
-          },
-        },
-        symbolSize: 5,
-        data: data,
-      },
-    ],
-  };
-  myChart.setOption(option);
-  return myChart;
-}
-
-function pltWalkLine(elementId, data_list, new_data, y_lim, max_duration = 60) {
-  walk_data(data_list, new_data);
-  let x_left = data_list[0][0];
-  let x_right = data_list[data_list.length - 1][0];
-  x_right = x_right > max_duration ? x_right : max_duration;
-  pltLineChart(elementId, data_list, [x_left, x_right], y_lim);
-}
 
 function pltArrayLine(elementId, data_array, y_lim = [0, 100]) {
   let _data = [];
@@ -791,13 +887,7 @@ function pltArrayLine(elementId, data_array, y_lim = [0, 100]) {
   pltLineChart(elementId, _data, [0, data_array.length], y_lim);
 }
 
-function pltArrayScatter(elementId, data_array, y_lim) {
-  let _data = [];
-  for (let i = 0; i < data_array.length; i++) {
-    _data.push([i, data_array[i]]);
-  }
-  pltScatterChart(elementId, _data, [0, data_array.length], y_lim);
-}
+
 
 function scatter3d(elementId, data, cmap) {
   let dom = document.getElementById(elementId);

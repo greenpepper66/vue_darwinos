@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- router-link定义页面中点击触发部分 -->
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/node?nodeID=0">Node</router-link> |
       <router-link to="/chip?nodeID=0&chipID=3">Chip</router-link> |
@@ -12,7 +12,7 @@
       |
       <router-link to="/boardsData">BoardsData</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
     <!-- router-view定义页面中显示部分 -->
     <router-view />
   </div>

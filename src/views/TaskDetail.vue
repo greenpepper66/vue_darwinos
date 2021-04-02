@@ -2,7 +2,7 @@
   <div class="taskDetail_page">
     <div class="clearfix thewrap taskDetail_top">
       <div class="row">
-        <div class="taskDetail_title">任务基本信息</div>
+        <div class="taskDetail_info_title">任务基本信息</div>
       </div>
 
       <span id="nodeIDValue" style="display: none">
@@ -49,7 +49,7 @@
 
     <div class="clearfix thewrap taskDetail_middle">
       <div class="row">
-        <div class="taskDetail_title">任务运行图示</div>
+        <div class="taskDetail_draw_title">任务运行图示</div>
       </div>
 
       <div class="row">
@@ -72,7 +72,7 @@
         <div class="col-md-6 taskDetail_echart_box">
           <div id="taskChipEchart" class="taskDetail_chipEchart"></div>
 
-          <div class="chip_neure_logoBox">
+          <div class="chip_neure_logoBox" id="taskDetail_chip_neure_logoBox" style="display: none;">
             <div class="chip_coommonNeureLogo freeNeureLogo"></div>
             <span class="chip_logoDesc"> 空闲状态</span>
             <div class="chip_coommonNeureLogo runNeureLogo"></div>
@@ -159,7 +159,6 @@ export default vue_taskDetail;
   *zoom: 1;
 }
 .thewrap {
-  margin-top: 16px;
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
@@ -170,7 +169,8 @@ export default vue_taskDetail;
 #taskTimeEchart,
 #MembraneVoltageEchart,
 #MembraneVoltageLineEchart {
-  height: 330px;
+  height: 380px;
   margin: 0 auto;
+  width: 100%;
 }
 </style>

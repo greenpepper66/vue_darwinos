@@ -1,5 +1,5 @@
 <template>
-  <div class="chip">
+  <div class="chipInfo_page">
     <div class="clearfix thewrap">
       <div class="chip_quarter-div chip_matrix">
         <div class="chip_title">
@@ -46,21 +46,21 @@
               <template v-if="board_ip == ''">
                 <tr>
                   <template v-for="i in 5">
-                    <td width="10%" :key="i">-</td>
+                    <td  :key="i">-</td>
                   </template>
                 </tr>
               </template>
               <template v-else>
                 <tr>
-                  <td width="10%">{{ chipID }}</td>
-                  <td width="10%">{{ nodeID }}</td>
-                  <td width="10%">{{ board_ip }}</td>
-                  <td width="10%">{{ neureNum }}</td>
+                  <td >{{ chipID }}</td>
+                  <td >{{ nodeID }}</td>
+                  <td >{{ board_ip }}</td>
+                  <td>{{ neureNum }}</td>
                   <template v-if="chipStatus == 1">
-                    <td width="10%">健康</td>
+                    <td >健康</td>
                   </template>
                   <template v-else>
-                    <td width="10%">异常</td>
+                    <td >异常</td>
                   </template>
                 </tr>
               </template>
@@ -130,10 +130,7 @@ export default vue_chip;
   *zoom: 1;
 }
 .thewrap {
-  margin-top: 16px;
   width: 100%;
-  box-sizing: border-box;
-  overflow: auto;
 }
 
 #heatmap {
@@ -143,7 +140,7 @@ export default vue_chip;
   min-height: 300px;
 }
 #chipPie {
-  width: 100%;
+  width: 80%;
   height: 80%;
   margin: 0 auto;
   min-height: 300px;

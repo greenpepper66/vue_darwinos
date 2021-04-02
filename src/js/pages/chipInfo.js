@@ -46,15 +46,15 @@ var vue_chip = {
 
         });
 
-        // test 画图
-        let data = [];
-        for (let i = 0; i < 24; i++) {
-            for (let j = 0; j < 24; j++) {
-                data.push([j, i, 0]);
-            }
-        }
-        pltEffectScatter("heatmap", 24, 24, data, 8);
-        drawChipEchart(0, _this.chipID);
+        // // test 画图
+        // let data = [];
+        // for (let i = 0; i < 24; i++) {
+        //     for (let j = 0; j < 24; j++) {
+        //         data.push([j, i, 0]);
+        //     }
+        // }
+        // pltEffectScatter("heatmap", 24, 24, data, 8);
+        // drawChipEchart(0, _this.chipID);
 
 
         // 持续连接用的？

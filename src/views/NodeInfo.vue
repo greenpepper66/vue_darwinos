@@ -1,5 +1,5 @@
 <template>
-  <div class="node">
+  <div class="nodeInfo_page">
     <div class="clearfix thewrap">
       <div class="node_quarter-div node_chips">
         <div class="node_title">节点芯片图</div>
@@ -60,21 +60,21 @@
               <template v-if="nodeInfo.length == 0">
                 <tr>
                   <template v-for="i in 5">
-                    <td width="10%" :key="i">-</td>
+                    <td  :key="i">-</td>
                   </template>
                 </tr>
               </template>
               <template v-else>
                 <tr>
-                  <td width="10%">{{ nodeInfo.id }}</td>
-                  <td width="10%">{{ nodeInfo.ip }}</td>
-                  <td width="10%">{{ chipNum }}</td>
-                  <td width="10%">{{ neureNum }}</td>
+                  <td >{{ nodeInfo.id }}</td>
+                  <td >{{ nodeInfo.ip }}</td>
+                  <td >{{ chipNum }}</td>
+                  <td >{{ neureNum }}</td>
                   <template v-if="nodeInfo.status == 1">
-                    <td width="10%">健康</td>
+                    <td >健康</td>
                   </template>
                   <template v-else>
-                    <td width="10%">异常</td>
+                    <td >异常</td>
                   </template>
                 </tr>
               </template>
@@ -88,11 +88,11 @@
           <table class="node_page_table">
             <thead>
               <tr>
-                <th width="10%">模型ID</th>
-                <th width="10%">模型名称</th>
-                <th width="10%">节点ID</th>
-                <th width="10%">节点IP</th>
-                <th width="10%">模型大小</th>
+                <th >模型ID</th>
+                <th >模型名称</th>
+                <th >节点ID</th>
+                <th >节点IP</th>
+                <th >模型大小</th>
                 <!-- <th>运行时间</th> -->
               </tr>
             </thead>
@@ -110,11 +110,11 @@
                 </tr>
               </template>
               <tr v-for="task in taskFileList">
-                <td width="10%">{{ task.id }}</td>
-                <td width="10%">{{ task.name }}</td>
-                <td width="10%">{{ task.nodeID }}</td>
-                <td width="10%">{{ task.nodeIP }}</td>
-                <td width="10%">{{ task.size }}</td>
+                <td >{{ task.id }}</td>
+                <td >{{ task.name }}</td>
+                <td >{{ task.nodeID }}</td>
+                <td >{{ task.nodeIP }}</td>
+                <td >{{ task.size }}</td>
               </tr>
             </tbody>
           </table>
@@ -155,8 +155,6 @@ export default vue_node;
 }
 .thewrap {
   width: 100%;
-  box-sizing: border-box;
-  overflow: auto;
 }
 
 #nodeChipsEchart {

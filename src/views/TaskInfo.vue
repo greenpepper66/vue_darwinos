@@ -50,18 +50,18 @@
             <template v-if="model_list.length == 0">
               <tr>
                 <template v-for="i in 7">
-                  <td width="10%" :key="i">-</td>
+                  <td  :key="i">-</td>
                 </template>
               </tr>
             </template>
             <tr v-for="(item, index) in model_list" :key="index">
-              <td width="10%">{{ item.name }}</td>
-              <td width="10%">{{ item.id }}</td>
-              <td width="10%">{{ item.board }}</td>
-              <td width="10%">{{ item.ip }}</td>
-              <td width="10%">{{ item.size }}</td>
-              <td width="10%">{{ item.time }}</td>
-              <td width="20%">
+              <td >{{ item.name }}</td>
+              <td >{{ item.id }}</td>
+              <td >{{ item.board }}</td>
+              <td >{{ item.ip }}</td>
+              <td >{{ item.size }}</td>
+              <td >{{ item.time }}</td>
+              <td >
                 <button @click="task_start(index)">启动</button>
                 <button @click="task_stop(index)">终止</button>
                 <button @click="task_reset(index)">重启</button>
