@@ -79,7 +79,7 @@ var vue_chip = {
                 }
                 // 画饼图, 参数为神经元使用比例 芯片ID
                 console.log("使用了：", _this.usedNeureNum);
-                drawChipEchart(Math.ceil(_this.usedNeureNum / (24 * 24) * 100), 0);
+                drawChipEchart(Math.ceil(_this.usedNeureNum / (24 * 24) * 100),  _this.chipID);
 
             });
         },
