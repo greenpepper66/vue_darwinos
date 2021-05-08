@@ -46,6 +46,15 @@ var vue_uploadModel = {
   methods: {
     closeUploadResult() {
       document.getElementById('uploadResult').style.display = 'none';
+      
+      // 测试问题修改：上传成功后跳转到模型列表页面
+      let msg = document.getElementById("modelUploadResult").innerHTML;
+      console.log("弹出框内容：", msg);
+      if (msg.indexOf("ok") != -1) {
+        this.$router.push({
+          path: "/model",
+        });
+      }
     },
     getUploadModelFile() {
       let fullPath = document.getElementById("upload_file_input").value.split("\\");

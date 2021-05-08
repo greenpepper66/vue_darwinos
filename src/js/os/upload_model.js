@@ -37,8 +37,8 @@ function upload_file(fileElementId, ip_specified = "AUTO") {
   var file = $("#" + fileElementId)[0].files[0]; //拿到上传文件
   console.log(file);
   if (file == undefined) {
-    // alert("没有选中文件");
     showUploadResult("提示：没有选中文件");
+    // showUploadResult("test: ok!");
     return;
   }
   var md5_hash = 0;
