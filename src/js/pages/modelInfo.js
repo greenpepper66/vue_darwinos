@@ -108,9 +108,22 @@ var vue_model = {
         /* 跳转到上传模型页面 */
         goUploadModelPage(router) {
             console.log("click upload model ")
-            router.push({
-                path: "/uploadModel",
-            });
+            // router.push({
+            //     path: "/uploadModel",   //这种只能在当前页面重新加载新的页面
+            // });
+
+            // 给插件发消息 跳转到模型上传页面
+            $.ajax({
+                url: "http://localhost:5002/modelListGotoUploadPage",
+                method: "post",
+                data: {},
+                success: function(response) {
+                  console.log(response, "page modelListGotoUploadPage success");
+                },
+                error: function(error) {
+                  console.error(error, "page modelListGotoUploadPage error");
+                }
+              });
         },
 
         /* 部署模型，发送给模型所在节点的ip */

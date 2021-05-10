@@ -1,4 +1,6 @@
 let echarts = require("echarts"); // 需要使用require方式引入库
+import $ from "jquery";
+
 
 let myChart;
 
@@ -192,12 +194,28 @@ function addChipRouter(router, nodeID) {
                 //      },
                 // });
                 // window.open(routeData.href, '_blank');
-                router.push({
-                    path: "/chip",
-                    query: {
-                        nodeID: nodeID,
-                        chipID: chipID,
+
+
+                // router.push({
+                //     path: "/chip",
+                //     query: {
+                //         nodeID: nodeID,
+                //         chipID: chipID,
+                //     },
+                // });
+
+                // 给插件发消息 跳转到芯片详情页面
+                $.ajax({
+                    url: "http://localhost:5002/gotoChipDetailPage",
+                    method: "post",
+                    data: JSON.stringify({ nodeID: nodeID, chipID: chipID }),
+                    // dataType: "json",   // 加上这个会进入error分支，即使返回200
+                    success: function (response) {
+                        console.log(response, "page gotoChipDetailPage success");
                     },
+                    error: function (error) {
+                        console.error(error, "page gotoChipDetailPage error");
+                    }
                 });
             } else {
                 console.log("没有点中芯片");

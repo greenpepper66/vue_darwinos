@@ -1,5 +1,6 @@
 import { upload_file } from "../os/upload_model";
 import { get_slave_boards } from "../os/get_slave_boards.js";
+import $ from "jquery";
 
 var vue_uploadModel = {
   name: "Node",
@@ -50,10 +51,30 @@ var vue_uploadModel = {
       // 测试问题修改：上传成功后跳转到模型列表页面
       let msg = document.getElementById("modelUploadResult").innerHTML;
       console.log("弹出框内容：", msg);
+
+      
+
+
+      
       if (msg.indexOf("ok") != -1) {
-        this.$router.push({
-          path: "/model",
+        // this.$router.push({
+        //   path: "/model",
+        // });
+
+        // 给插件发消息 跳转到model列表页面
+        $.ajax({
+          url: "http://localhost:5002/uploadOkGotoModelList",
+          method: "post",
+          data: {},
+          // dataType: "json",   // 加上这个会进入error分支，即使返回200
+          success: function(response) {
+            console.log(response, "page uploadOkGotoModelList success");
+          },
+          error: function(error) {
+            console.error(error, "page uploadOkGotoModelList error");
+          }
         });
+
       }
     },
     getUploadModelFile() {

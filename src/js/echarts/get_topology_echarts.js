@@ -1,5 +1,7 @@
 //import echarts from 'echarts'  // 不可以用这个
 let echarts = require("echarts"); // 需要使用require方式引入库
+import $ from "jquery";
+
 
 // https://www.makeapie.com/editor.html?c=xO6bpzhc_c
 
@@ -451,10 +453,27 @@ function addNodeRouter(router) {
                 //     query: { nodeID: arrayIndex },
                 // });
                 // window.open(routeData.href, '_blank'); // 浏览器新开一个窗口，但是集成到vscode中不能跳转
-                router.push({
-                    path: "/node",
-                    query: { nodeID: arrayIndex },
+
+                // router.push({
+                //     path: "/node",
+                //     query: { nodeID: arrayIndex },
+                // });   //集成到插件后只能在当前tab页刷新
+
+                // 给插件发消息 跳转到节点详情页面
+                $.ajax({
+                    url: "http://localhost:5002/gotoNodeDetailPage",
+                    method: "post",
+                    data: JSON.stringify({ nodeID: arrayIndex }),
+                    // dataType: "json",   // 加上这个会进入error分支，即使返回200
+                    success: function (response) {
+                        console.log(response, "page gotoNodeDetailPage success");
+                    },
+                    error: function (error) {
+                        console.error(error, "page gotoNodeDetailPage error");
+                    }
                 });
+
+
             } else {
                 console.log("节点不在线");
                 //alert("点击了边" + param.value);
