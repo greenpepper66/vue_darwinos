@@ -24,7 +24,7 @@ var vue_controler = {
             totalNeureNum: 60 * 12 * 24 * 24,
             runNeureNum: 0,
             runNodeIDList: [], // 存放运行中节点的id列表,不含master节点
-            masterNodeID: 1, // master节点默认id，系统运行后不一定是多少，只有ip固定
+            masterNodeID: -1, // master节点默认id，系统运行后不一定是多少，只有ip固定
 
             shadowNodeID: -1, // shadow节点id
 
