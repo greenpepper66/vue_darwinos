@@ -5,6 +5,9 @@ import store from './store'
 
 import Element from 'element-ui'
 import "element-ui/lib/theme-chalk/index.css"
+
+import  "./lib/bootstrap-3.3.1/css/bootstrap.min.css";
+
 Vue.use(Element)
 
 

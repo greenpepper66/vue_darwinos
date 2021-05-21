@@ -38,6 +38,12 @@ var vue_taskDetail = {
         this.modelID = document.getElementById("modelIDValue").innerHTML;
         console.log("node and model id: ", this.nodeID, this.modelID);
 
+        // 先画出图的轮廓
+        pltEffectScatter("taskChipEchart", 24, 24, [], 8);
+        document.getElementById("taskDetail_chip_neure_logoBox").style.display = 'block';
+        pltWalkLine("taskTimeEchart", [], 0, undefined, 60, "x", "时间/ms");
+        pltArrayScatter( "MembraneVoltageEchart",  [], undefined, "x", "y/mv" );
+        pltWalkLine( "MembraneVoltageLineEchart", [], array_mean([]), undefined, 60, "x", "电压/mv" );
 
         let _this = this;
         // 获取模型信息
@@ -87,18 +93,6 @@ var vue_taskDetail = {
         }, 6000);
 
 
-        // // test 画图
-        // let data = [];
-        // for (let i = 0; i < 24; i++) {
-        //     for (let j = 0; j < 24; j++) {
-        //         data.push([j, i, 0]);
-        //     }
-        // }
-        // pltEffectScatter("taskChipEchart", 24, 24, data, 8);
-        // document.getElementById("taskDetail_chip_neure_logoBox").style.display = 'block';
-        // pltWalkLine("taskTimeEchart", [], 0, undefined, 60, "图像", "时间/ms");
-        // pltArrayScatter( "MembraneVoltageEchart",  [], undefined, "x", "y/mv" );
-        // pltWalkLine( "MembraneVoltageLineEchart", [], array_mean([]), undefined, 60, "采样", "电压/mv" );
     },
 
     watch: {
@@ -226,7 +220,7 @@ var vue_taskDetail = {
                     60,
                     "x",
                     "y/ms", 
-                    "图像", 
+                    "x", 
                     "时间/ms"
                 );
             });
@@ -256,7 +250,7 @@ var vue_taskDetail = {
                     array_mean(data),
                     undefined,
                     60,
-                    "采样", 
+                    "x", 
                     "电压/mv"
                 );
             }

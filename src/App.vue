@@ -37,38 +37,58 @@ function updateTreeView() {
     tasks: []
   };
 
-  //测试用
-  /*  let node = {
-        ip: "192.0.0.0",
-        id: 1,
-        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
-        role: 1,  //节点角色，1-master, 2-shadow,3-slave
-      };
-      JSONdata.nodes.push(node);
+//   //测试用
+// let node = {
+//         ip: "192.0.0.0",
+//         id: 1,
+//         chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//         usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
+//         role: 1,  //节点角色，1-master, 2-shadow,3-slave
+//       };
+//       JSONdata.nodes.push(node);
 
-node = {
-        ip: "192.0.0.1",
-        id: 4,
-        chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
-        role: 3,  //节点角色，1-master, 2-shadow,3-slave
-      };
-      JSONdata.nodes.push(node);
-let model = {
-              id: 2,
-              name: "zxc",
-              nodeID: 1,
-              nodeIP: "192.0.0.0"              
-          }
-JSONdata.models.push(model)
-let task = {
-              id: 4,
-              name: "qwe",
-              nodeID: 1,
-              nodeIP: "192.0.0.0"              
-          }
-          JSONdata.tasks.push(task)  */
+// node = {
+//         ip: "192.0.0.1",
+//         id: 4,
+//         chips: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//         usedNeureNums:[120,120,120,120,120,120,120,120,120,120,120,120],
+//         role: 3,  //节点角色，1-master, 2-shadow,3-slave
+//       };
+//       JSONdata.nodes.push(node);
+// let model = {
+//               id: 2,
+//               name: "zxc",
+//               nodeID: 1,
+//               nodeIP: "192.0.0.0"              
+//           }
+// JSONdata.models.push(model)
+// let task = {
+//               id: 4,
+//               name: "qwe",
+//               nodeID: 1,
+//               nodeIP: "192.0.0.0"              
+//           }
+//           JSONdata.tasks.push(task)  
+
+//   // 发送给插件导航栏
+//     console.log("app page get all boards data: ", JSONdata.nodes.length);
+//     $.ajax({
+//       url: "http://localhost:5002/post",
+//       method: "post",
+//       data: JSON.stringify(JSONdata),
+//       // dataType: "json",   // 加上这个会进入error分支，即使返回200
+//       success: function(response) {
+//         console.log(response, "page post success");
+//       },
+//       error: function(error) {
+//         console.error(error, "page post error");
+//       }
+//     });
+
+
+
+
+
 
   get_slave_boards(function(slave_boards) {
     for (let i = 0; i < slave_boards.length; i++) {
@@ -114,7 +134,7 @@ let task = {
     }
 
     // 发送给插件导航栏
-    console.log("app page get all boards data: ", JSONdata);
+    console.log("app page get all boards data: ", JSONdata.nodes.length);
     $.ajax({
       url: "http://localhost:5002/post",
       method: "post",
@@ -146,6 +166,10 @@ let task = {
     //   }
     // }
   });
+
+
+
+
 }
 
 setInterval(updateTreeView, 3000);

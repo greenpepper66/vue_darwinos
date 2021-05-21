@@ -327,7 +327,7 @@ function pltScatterChart(elementId, data, xlim = [0, 60], ylim = [null, null]) {
     xAxis: {
       // type: "category",
       type: "value",
-      name: "采样",
+      name: "x",
       minorTick: {
         show: true,
       },

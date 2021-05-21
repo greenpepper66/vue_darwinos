@@ -145,7 +145,7 @@ export default vue_taskDetail;
 </script>
 
 <style>
-@import "../lib/bootstrap-3.3.1/css/bootstrap.min.css";
+
 
 .clearfix:before,
 .clearfix:after {
