@@ -74,11 +74,12 @@ var vue_model = {
         showDeployResult: function () {
             console.log("into func showDeployResult: ", this.modelDeployResult);
             document.getElementById('deployResult').style.display = 'block';
-            // document.getElementById('app').style.display = 'block';
         },
         closeDeployResult: function () {
             document.getElementById('deployResult').style.display = 'none';
-            // document.getElementById('app').style.display = 'none';
+        },
+        closeDeleteResult: function () {
+            document.getElementById('modelDeleteResult').style.display = 'none';
         },
 
         /* 搜索框实现 */
@@ -117,13 +118,13 @@ var vue_model = {
                 url: "http://localhost:5002/modelListGotoUploadPage",
                 method: "post",
                 data: {},
-                success: function(response) {
-                  console.log(response, "page modelListGotoUploadPage success");
+                success: function (response) {
+                    console.log(response, "page modelListGotoUploadPage success");
                 },
-                error: function(error) {
-                  console.error(error, "page modelListGotoUploadPage error");
+                error: function (error) {
+                    console.error(error, "page modelListGotoUploadPage error");
                 }
-              });
+            });
         },
 
         /* 部署模型，发送给模型所在节点的ip */
@@ -131,7 +132,7 @@ var vue_model = {
         task_deploy(key_ip, model_id) {
             let _this = this;
             console.log("start deploy the model", this.modelDeployResult);
-            
+
             $.post(
                 "http://" + key_ip + "/choosed_config/",
                 {
@@ -165,7 +166,7 @@ var vue_model = {
                             console.log("deploy failed, ret: ", ret);
                         } else {
                             clearInterval(interval);
-                            if(ret.code == 0 ) {
+                            if (ret.code == 0) {
                                 _this.modelDeployResult = "success";
                             } else {
                                 _this.modelDeployResult = "failed"
@@ -181,6 +182,7 @@ var vue_model = {
         /* 删除模型文件 */
         // todo: 删除前加弹窗 确认+取消
         task_delete(ip, model_id) {
+            let _this = this;
             $.post(
                 "http://" + ip + "/delete_file/",
                 {
@@ -188,10 +190,16 @@ var vue_model = {
                 },
                 function (ret) {
                     console.log("model delete ret:", ret);
+                    if(ret == "ok") {
+                        console.log("delete model info from table.");
+                        _this.deleteRowByID(model_id);
+                    } else {
+                        document.getElementById('modelDeleteResult').style.display = 'block';
+                    }
                 }
             );
             // 删除任务后要更新模型文件列表。
-            this.$router.go(0); // 会有短暂的闪烁现象
+            // this.$router.go(0); // 会有短暂的闪烁现象
         },
 
         sleep(numberMillis) {
@@ -203,6 +211,20 @@ var vue_model = {
                     return;
             }
         },
+
+        // 根据id匹配结果，删除一行记录
+        deleteRowByID(id) {
+            let tab = document.getElementById('modelListTable');
+            let trs = tab.getElementsByTagName('tr');
+            for (let i = 0; i < trs.length; i++) {
+                console.log("行号：", trs[i].rowIndex);
+                if (trs[i].cells[0].innerHTML == id) {
+                    console.log("列一内容：", trs[i].cells[0].innerHTML);
+                    tab.deleteRow(trs[i].rowIndex);
+                }
+            }
+        }
+
     }
 };
 

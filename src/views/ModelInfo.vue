@@ -59,7 +59,7 @@
       <div class="model_title">模型列表</div>
 
       <div class="row">
-        <table class="model_page_table-list">
+        <table class="model_page_table-list" id="modelListTable">
           <thead>
             <tr>
               <th>模型ID</th>
@@ -139,6 +139,17 @@
           关闭
         </button>
       </div>
+
+    <div id="modelDeleteResult" class="model_deploy_alert-box">
+        <p align="center" class="model_deploy_alert-txt">
+          删除失败，请重试。
+        </p>
+        <button class="model_deploy_alert-btn" @click="closeDeleteResult()">
+          关闭
+        </button>
+      </div>
+      
+
     </div>
   </div>
 </template>
