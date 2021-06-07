@@ -19,19 +19,19 @@ function buildOption() {
             textStyle: {
                 rich: {
                     a: {
-                        fontSize: 16,
+                        fontSize: 56,
                         color: '#30AEC2'
                     },
 
                     c: {
-                        fontSize: 16,
+                        fontSize: 56,
                         color: '#30AEC2',
                         // padding: [5,0]
                     }
                 }
             },
             subtextStyle: {
-                fontSize: 16,
+                fontSize: 26,
                 color: '#30AEC2',
                 align: 'center',
             },
@@ -237,115 +237,116 @@ function buildOption() {
                     };
                 },
                 data: [0]
-            }, {
-                name: '芯片使用比例',
-                type: 'pie',
-                radius: ['52%', '40%'],
-                silent: true,
-                clockwise: true,
-                startAngle: 90,
-                z: 0,
-                zlevel: 0,
-                label: {
-                    normal: {
-                        position: "center",
+            }, 
+            // {
+            //     name: '芯片使用比例',
+            //     type: 'pie',
+            //     radius: ['52%', '40%'],
+            //     silent: true,
+            //     clockwise: true,
+            //     startAngle: 90,
+            //     z: 0,
+            //     zlevel: 0,
+            //     label: {
+            //         normal: {
+            //             position: "center",
 
-                    }
-                },
-                data: [{
-                    value: value,
-                    name: "",
-                    itemStyle: {
-                        normal: {
-                            color: { // 完成的圆环的颜色
-                                colorStops: [{
-                                    offset: 0,
-                                    color: '#A098FC' // 0% 处的颜色
-                                },
-                                {
-                                    offset: 0.3,
-                                    color: '#4386FA' // 0% 处的颜色
-                                },
-                                {
-                                    offset: 0.6,
-                                    color: '#4FADFD' // 0% 处的颜色
-                                },
-                                {
-                                    offset: 0.8,
-                                    color: '#0CD3DB' // 100% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: '#7ab5ff' // 100% 处的颜色
-                                }
-                                ]
-                            },
-                        }
-                    }
-                },
-                {
-                    value: 100 - value,
-                    name: "",
-                    label: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: "#7ab5ff"  // 第二圈宽圈颜色
-                        }
-                    }
-                }
-                ]
-            },
-            {
-                name: '芯片使用率',
-                type: 'pie',
-                radius: ['32%', '35%'],
-                silent: true,
-                clockwise: true,
-                startAngle: 270,
-                z: 0,
-                zlevel: 0,
-                label: {
-                    normal: {
-                        position: "center",
+            //         }
+            //     },
+            //     data: [{
+            //         value: value,
+            //         name: "",
+            //         itemStyle: {
+            //             normal: {
+            //                 color: { // 完成的圆环的颜色
+            //                     colorStops: [{
+            //                         offset: 0,
+            //                         color: '#A098FC' // 0% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 0.3,
+            //                         color: '#4386FA' // 0% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 0.6,
+            //                         color: '#4FADFD' // 0% 处的颜色
+            //                     },
+            //                     {
+            //                         offset: 0.8,
+            //                         color: '#0CD3DB' // 100% 处的颜色
+            //                     }, {
+            //                         offset: 1,
+            //                         color: '#7ab5ff' // 100% 处的颜色
+            //                     }
+            //                     ]
+            //                 },
+            //             }
+            //         }
+            //     },
+            //     {
+            //         value: 100 - value,
+            //         name: "",
+            //         label: {
+            //             normal: {
+            //                 show: false
+            //             }
+            //         },
+            //         itemStyle: {
+            //             normal: {
+            //                 color: "#7ab5ff"  // 第二圈宽圈颜色
+            //             }
+            //         }
+            //     }
+            //     ]
+            // },
+            // {
+            //     name: '芯片使用率',
+            //     type: 'pie',
+            //     radius: ['32%', '35%'],
+            //     silent: true,
+            //     clockwise: true,
+            //     startAngle: 270,
+            //     z: 0,
+            //     zlevel: 0,
+            //     label: {
+            //         normal: {
+            //             position: "center",
 
-                    }
-                },
-                data: [{
-                    value: value,
-                    name: "",
-                    itemStyle: {
-                        normal: {
-                            color: { // 完成的圆环的颜色
-                                colorStops: [{
-                                    offset: 0,
-                                    color: '#7ab5ff' // 0% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: '#7ab5ff' // 100% 处的颜色
-                                }]
-                            },
-                        }
-                    }
-                },
-                {
-                    value: 100 - value,
-                    name: "",
-                    label: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: "#7ab5ff"  //最中间细圈颜色
-                        }
-                    }
-                }
-                ]
-            },
+            //         }
+            //     },
+            //     data: [{
+            //         value: value,
+            //         name: "",
+            //         itemStyle: {
+            //             normal: {
+            //                 color: { // 完成的圆环的颜色
+            //                     colorStops: [{
+            //                         offset: 0,
+            //                         color: '#7ab5ff' // 0% 处的颜色
+            //                     }, {
+            //                         offset: 1,
+            //                         color: '#7ab5ff' // 100% 处的颜色
+            //                     }]
+            //                 },
+            //             }
+            //         }
+            //     },
+            //     {
+            //         value: 100 - value,
+            //         name: "",
+            //         label: {
+            //             normal: {
+            //                 show: false
+            //             }
+            //         },
+            //         itemStyle: {
+            //             normal: {
+            //                 color: "#7ab5ff"  //最中间细圈颜色
+            //             }
+            //         }
+            //     }
+            //     ]
+            // },
 
         ]
     };
